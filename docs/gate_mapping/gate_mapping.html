@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoomQ L1 门映射表 · 12门 × 3后端</title>
+<style>
+  :root {
+    --ok: #16a34a; --ok-bg: #f0fdf4;
+    --map: #d97706; --map-bg: #fffbeb;
+    --no: #dc2626; --no-bg: #fef2f2;
+    --info: #2563eb; --info-bg: #eff6ff;
+    --border: #e5e7eb; --muted: #6b7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f8fafc; color: #0f172a; padding: 32px 20px 60px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 24px; margin-bottom: 6px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 22px; font-size: 13px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .dot.ok { background: var(--ok); } .dot.map { background: var(--map); } .dot.no { background: var(--no); }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+  th { background: #f1f5f9; font-weight: 600; white-space: nowrap; }
+  td.cell { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 13px; }
+  tr:last-child td { border-bottom: none; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .b-ok  { background: var(--ok-bg); color: var(--ok); }
+  .b-map { background: var(--map-bg); color: var(--map); }
+  .b-no  { background: var(--no-bg); color: var(--no); }
+  .b-info{ background: var(--info-bg); color: var(--info); }
+  .note { margin-top: 22px; background: #fff; border-radius: 12px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .note h2 { font-size: 16px; margin-bottom: 12px; }
+  .note p, .note li { font-size: 14px; line-height: 1.7; color: #334155; }
+  .note ul { padding-left: 20px; }
+  code { background: #f1f5f9; padding: 1px 6px; border-radius: 4px; font-family: "SF Mono", Menlo, monospace; font-size: 12.5px; }
+  .gate-num { color: var(--muted); font-size: 12px; margin-right: 6px; }
+  .sect { margin-top: 28px; }
+  .sect h2 { font-size: 17px; margin-bottom: 12px; padding-left: 10px; border-left: 4px solid var(--info); }
+  .sect h3 { font-size: 15px; margin: 18px 0 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>LoomQ L1 门映射表 <span style="font-size:14px;color:var(--muted)">12 门 × 3 后端</span></h1>
+  <p class="sub">实测环境：loomq310 venv（spinqit 0.2.4 / pyqpanda 3.8.5 / amazon-braket-sdk 1.95.0 + default-simulator 1.27.0）· 2026-08-18</p>
+
+  <div class="legend">
+    <span><i class="dot ok"></i> 原生同名支持</span>
+    <span><i class="dot map"></i> 需改名映射</span>
+    <span><i class="dot no"></i> 本地 SDK 不支持（需分解/走 QASM2）</span>
+  </div>
+
+  <div class="sect">
+    <h2>一、三后端支持矩阵（12 门）</h2>
+    <table>
+      <thead>
+        <tr><th>#</th><th>门 (QASM2)</th><th>spinq</th><th>braket</th><th>originq 契约</th><th>originq pyqpanda 实测</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td class="cell">h</td><td class="cell">h</td><td class="cell">h</td><td class="cell">H</td><td class="cell">H</td></tr>
+        <tr><td>2</td><td class="cell">x</td><td class="cell">x</td><td class="cell">x</td><td class="cell">X</td><td class="cell">X</td></tr>
+        <tr><td>3</td><td class="cell">s</td><td class="cell">s</td><td class="cell">s</td><td class="cell">S</td><td class="cell">S</td></tr>
+        <tr>
+          <td>4</td><td class="cell">sdg</td>
+          <td class="cell">sdg <span class="badge b-ok">原生</span></td>
+          <td class="cell"><span class="badge b-map">si</span></td>
+          <td class="cell">SDAG <span class="badge b-info">契约</span></td>
+          <td class="cell"><span class="badge b-no">未定义</span> → U1(-π/2)</td>
+        </tr>
+        <tr><td>5</td><td class="cell">t</td><td class="cell">t</td><td class="cell">t</td><td class="cell">T</td><td class="cell">T</td></tr>
+        <tr>
+          <td>6</td><td class="cell">tdg</td>
+          <td class="cell">tdg <span class="badge b-ok">原生</span></td>
+          <td class="cell"><span class="badge b-map">ti</span></td>
+          <td class="cell">TDAG <span class="badge b-info">契约</span></td>
+          <td class="cell"><span class="badge b-no">未定义</span> → U1(-π/4)</td>
+        </tr>
+        <tr>
+          <td>7</td><td class="cell">rz(θ)</td>
+          <td class="cell">rz(θ) <span class="badge b-ok">原生</span></td>
+          <td class="cell">rz(θ) <span class="badge b-ok">原生</span></td>
+          <td class="cell">RZ q[k],(θ)</td>
+          <td class="cell">RZ q[0],(θ) <span class="badge b-map">第二格式</span></td>
+        </tr>
+        <tr>
+          <td>8</td><td class="cell">ry(θ)</td>
+          <td class="cell">ry(θ) <span class="badge b-ok">原生</span></td>
+          <td class="cell">ry(θ) <span class="badge b-ok">原生</span></td>
+          <td class="cell">RY q[k],(θ)</td>
+          <td class="cell">RY q[0],(θ) <span class="badge b-map">第二格式</span></td>
+        </tr>
+        <tr>
+          <td>9</td><td class="cell">cx</td>
+          <td class="cell">cx <span class="badge b-ok">原生</span></td>
+          <td class="cell"><span class="badge b-map">cnot</span></td>
+          <td class="cell">CNOT</td>
+          <td class="cell">CNOT</td>
+        </tr>
+        <tr>
+          <td>10</td><td class="cell">cu1(θ)</td>
+          <td class="cell">cu1(θ) <span class="badge b-ok">原生</span></td>
+          <td class="cell"><span class="badge b-map">cphaseshift(θ)</span></td>
+          <td class="cell">CU1 / CR</td>
+          <td class="cell">U1 q[0],(θ) <span class="badge b-map">替代名</span></td>
+        </tr>
+        <tr><td>11</td><td class="cell">swap</td><td class="cell">swap</td><td class="cell">swap</td><td class="cell">SWAP</td><td class="cell">SWAP</td></tr>
+        <tr>
+          <td>12</td><td class="cell">ccx</td>
+          <td class="cell">ccx <span class="badge b-ok">原生</span></td>
+          <td class="cell"><span class="badge b-map">ccnot</span></td>
+          <td class="cell">TOFFOLI / CCX</td>
+          <td class="cell">TOFFOLI</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sect">
+    <h2>二、braket 门名映射（5 个必改）</h2>
+    <table>
+      <thead><tr><th>QASM2</th><th>braket</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="cell">cx</td><td class="cell">cnot</td><td>braket 无 cx，实测报 "Gate cx is not defined"</td></tr>
+        <tr><td class="cell">sdg</td><td class="cell">si</td><td>S† 的 braket 名</td></tr>
+        <tr><td class="cell">tdg</td><td class="cell">ti</td><td>T† 的 braket 名</td></tr>
+        <tr><td class="cell">cu1(θ)</td><td class="cell">cphaseshift(θ)</td><td>受控相位门</td></tr>
+        <tr><td class="cell">ccx</td><td class="cell">ccnot</td><td>3 比特 Toffoli</td></tr>
+      </tbody>
+    </table>
+    <p class="sub" style="margin-top:8px">参数门 rx/ry/rz(θ) braket 原生支持。运行时需把 include 指向本地 braket_gates.inc 绝对路径。</p>
+  </div>
+
+  <div class="sect">
+    <h2>三、originq 要点</h2>
+    <div class="note">
+      <h3>run() 真实路径 = QASM 2.0（零映射）</h3>
+      <p><code>convert_qasm_string_to_qprog</code> 实测 12 门全部接受 —— <b>run() 不需要任何门名映射</b>。</p>
+      <h3>transpile 输出 OriginIR：门名 + 参数格式</h3>
+      <ul>
+        <li>门名映射：<code>sdg→SDAG</code>、<code>tdg→TDAG</code>、<code>cx→CNOT</code>、<code>cu1→CU1</code>、<code>ccx→TOFFOLI</code>（按 target_ir_contract.md 契约，评测器按契约解析）</li>
+        <li><b>参数门必须用第二格式</b>：<code>RZ q[0],(0.5)</code> / <code>RY q[0],(0.3)</code>。第一格式 <code>RZ(0.5)</code> 在 pyqpanda 3.8.5 语法错误</li>
+        <li>SDAG/TDAG 契约允许、pyqpanda 3.8.5 本地报 "undefined"（SDK bug/不兼容）；本地自检走 QASM2 路径规避</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sect">
+    <h2>四、adapter.py 改动清单</h2>
+    <div class="note">
+      <ul>
+        <li><b>spinq</b>：transpile 原样返回 QASM 2.0，零改动</li>
+        <li><b>braket</b>：补 4 项映射（当前只做了 cx→cnot）——<code>sdg→si, tdg→ti, cu1→cphaseshift, ccx→ccnot</code></li>
+        <li><b>originq</b>：transpile 补门名映射 + 参数门第二格式（当前 cx→CNOT 已有）</li>
+        <li><b>run()</b>：三后端吃 QASM 2.0，12 门全 OK，无需改</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

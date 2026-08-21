@@ -1,0 +1,43 @@
+{
+  "task_code": "S-260819-0001",
+  "info": {
+    "status": 200,
+    "msg": "",
+    "task": {
+      "tid": 61350,
+      "tcode": "S-260819-0001",
+      "tname": "GHZ state",
+      "bitNum": 3,
+      "clbitNum": 0,
+      "simulator": false,
+      "calcMatrix": false,
+      "runSimu": true,
+      "tstatus": "S",
+      "shots": 16384,
+      "sourceType": "circuitBoard",
+      "sourceOriginName": null,
+      "sourceAddr": "files-2026-08/S-260819-0001.qasm",
+      "sourceCode": "OPENQASM 2.0; \ninclude \"qelib1.inc\";\nqreg q[3];\n\nh q[0];\ncx q[0],q[1];\ncx q[1],q[2];",
+      "description": "",
+      "createdTime": "2026-08-19T13:51:56.016+00:00",
+      "startTime": "2026-08-19T13:54:29.147+00:00",
+      "endTime": "2026-08-19T13:56:56.473+00:00",
+      "errorMsg": null,
+      "platformId": 6,
+      "platformName": "3Qubit核磁量子计算机",
+      "platformCode": "triangulum_vp",
+      "machineId": 8,
+      "machineCode": "Triangulum-pro-1",
+      "userId": "xxxx",
+      "userName": "xxxx",
+      "timecost": 3.0,
+      "curQueueSize": -1,
+      "percentageFinished": null
+    }
+  },
+  "status": {
+    "status": 200,
+    "msg": "",
+    "taskStatus": "S"
+  }
+}

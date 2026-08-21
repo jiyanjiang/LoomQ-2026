@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoomQ 使用帮助</title>
+<style>
+  :root {
+    --primary: #2563eb; --primary-dark: #1d4ed8;
+    --bg: #f8fafc; --card: #fff; --border: #e5e7eb;
+    --text: #0f172a; --muted: #6b7280;
+    --code-bg: #f1f5f9; --ok: #16a34a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+         background: var(--bg); color: var(--text); padding: 32px 20px 60px; }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  h1 { font-size: 28px; margin-bottom: 4px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+  h2 { font-size: 20px; margin: 32px 0 14px; padding-left: 12px; border-left: 4px solid var(--primary); }
+  h3 { font-size: 16px; margin: 20px 0 8px; }
+  p, li { font-size: 14px; line-height: 1.8; color: #334155; }
+  ul, ol { padding-left: 24px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+          padding: 20px 24px; margin: 14px 0; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  code { background: var(--code-bg); padding: 2px 7px; border-radius: 5px;
+         font-family: "SF Mono", Menlo, monospace; font-size: 12.5px; }
+  pre { background: #0f172a; color: #e2e8f0; border-radius: 10px; padding: 16px 20px;
+        overflow-x: auto; font-size: 13px; line-height: 1.6; margin: 10px 0; }
+  pre code { background: none; padding: 0; color: inherit; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; background: #fff;
+          border-radius: 8px; overflow: hidden; font-size: 13px; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: #f1f5f9; font-weight: 600; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 999px;
+           font-size: 12px; font-weight: 600; }
+  .b-primary { background: #eff6ff; color: var(--primary); }
+  .b-ok { background: #f0fdf4; color: var(--ok); }
+  .faq-q { font-weight: 600; color: var(--text); }
+  .toc { columns: 2; list-style: none; padding: 0; }
+  .toc a { color: var(--primary); text-decoration: none; }
+  .toc li { padding: 4px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>LoomQ 使用帮助</h1>
+  <p class="sub">量子电路工作台 · v1.0 · 2026-08-18</p>
+
+  <div class="card">
+    <h3 style="margin-top:0">目录</h3>
+    <ul class="toc">
+      <li><a href="#what">一、这是什么</a></li>
+      <li><a href="#quick">二、快速开始</a></li>
+      <li><a href="#usage">三、日常用法</a></li>
+      <li><a href="#circuits">四、电路库清单</a></li>
+      <li><a href="#faq">五、常见问题</a></li>
+      <li><a href="#structure">六、目录结构</a></li>
+    </ul>
+  </div>
+
+  <h2 id="what">一、这是什么</h2>
+  <div class="card">
+    <p>LoomQ 是一个<b>量子电路工作台</b>，核心能力：</p>
+    <ul>
+      <li><b>三后端执行</b>：同一段 OpenQASM 2.0 电路，可在 spinq（量旋）、originq（本源）、braket（AWS）三个本地模拟器上运行</li>
+      <li><b>对齐尺子</b>：内置 qelib1.inc 标准语义模拟器，任何电路都能算出"正确参考分布"</li>
+      <li><b>验证闭环</b>：生成的电路自动与参考分布比对（Hellinger ≥ 0.97），错了自动报原因</li>
+      <li><b>电路库</b>：内置 21 个标准电路（Bell/GHZ/QFT/Grover/W/Toffoli…），一键调用</li>
+    </ul>
+  </div>
+
+  <h2 id="quick">二、快速开始</h2>
+  <div class="card">
+    <h3 style="margin-top:0">环境要求</h3>
+    <ul>
+      <li>Python 3.10（<code>~/.venvs/loomq310</code> 专用 venv）</li>
+      <li>依赖：<code>loomq_lib</code> 包（已 pip install -e 安装）</li>
+    </ul>
+    <h3>激活环境</h3>
+    <pre><code>source ~/.venvs/loomq310/bin/activate</code></pre>
+  </div>
+
+  <h2 id="usage">三、日常用法</h2>
+  <div class="card">
+    <h3 style="margin-top:0">1. 跑一个标准电路（三后端）</h3>
+    <pre><code>from loomq_lib import get_qasm, run_circuit, verify_all_targets
+
+qasm = get_qasm("a01_ghz3")                 # GHZ-3 电路
+r = run_circuit(qasm, "spinq", shots=8192)
+print(r["counts"], r["fidelity"], r["passed"])
+
+v = verify_all_targets(qasm)                # 三后端批量
+print(v["all_pass"])</code></pre>
+
+    <h3>2. 跑自定义电路</h3>
+    <pre><code>from loomq_lib import run_circuit, validate_qasm
+qasm = """OPENQASM 2.0;
+include "qelib1.inc";
+qreg q[2]; creg c[2];
+h q[0]; cx q[0], q[1];
+measure q -> c;"""
+ok, err = validate_qasm(qasm)
+if ok:
+    print(run_circuit(qasm, "originq"))</code></pre>
+
+    <h3>3. L2 自然语言生成（需 API key）</h3>
+    <pre><code>export LOOMQ_LLM_BASE_URL=https://api.deepseek.com
+export LOOMQ_LLM_API_KEY=&lt;你的 key&gt;
+export LOOMQ_LLM_MODEL=deepseek-v4-flash
+
+from starter_kit.adapter import agent_chat
+qasm = agent_chat("生成 5 比特 GHZ 态并全测量")</code></pre>
+
+    <h3>4. 命令行自检</h3>
+    <pre><code>cd /Users/jiyanjiang/Downloads/LoomQ/starter_kit
+python evaluator.py --level l1 --target spinq,originq,braket   # 6/6
+python evaluator.py --level l2                                 # 1/1</code></pre>
+  </div>
+
+  <h2 id="circuits">四、电路库（21 个）</h2>
+  <div class="card">
+    <p><b>别怕，这里不用懂量子力学。</b>下面的讲解用大白话，把每个门/算法当成"玩具"来看。想亲手玩？在 Web 界面点一下电路，三后端跑出来给你看结果。</p>
+
+    <h3 style="margin-top:14px">先懂两件事就够了</h3>
+    <ul>
+      <li>一个量子比特就像一枚<b>旋转中的硬币</b>——它可以是"正面朝上"（|0⟩）、"反面朝上"（|1⟩），也可以是<b>悬在半空没落地</b>的叠加态。</li>
+      <li>测量 = <b>让硬币落地</b>。落地后只有两个结果：正面或反面，概率由叠加态决定。</li>
+    </ul>
+
+    <h3>4.1 十二个门</h3>
+    <table>
+      <thead><tr><th>ID</th><th>门</th><th>通俗理解</th><th>效果</th></tr></thead>
+      <tbody>
+        <tr><td>g01_x</td><td><b>X</b></td><td>拨动开关</td><td>|0⟩↔|1⟩，像反转硬币</td></tr>
+        <tr><td>g02_h</td><td><b>H</b></td><td>抛硬币</td><td>确定的 |0⟩ 变悬空态，测量 50/50。起手式</td></tr>
+        <tr><td>g03_s</td><td><b>S</b></td><td>涂色（1/4 圈）</td><td>给"反面"涂色。测量看不到，干涉时起作用</td></tr>
+        <tr><td>g04_sdg</td><td><b>S†</b></td><td>涂色（反向 1/4 圈）</td><td>S 的反向，抵消用</td></tr>
+        <tr><td>g05_t</td><td><b>T</b></td><td>涂色（1/8 圈）</td><td>比 S 更细。S+T 能涂出任意颜色</td></tr>
+        <tr><td>g06_tdg</td><td><b>T†</b></td><td>涂色（反向 1/8 圈）</td><td>T 的反向，抵消用</td></tr>
+        <tr><td>g07_rz</td><td><b>RZ(θ)</b></td><td>任意角度旋钮</td><td>给"反面"涂任意角度。S/T 只是它的特例</td></tr>
+        <tr><td>g08_ry</td><td><b>RY(θ)</b></td><td>任意角度翻硬币</td><td>控制悬空角度：180°全翻、90°就 50/50</td></tr>
+        <tr><td>g09_cx</td><td><b>CX</b></td><td>联动开关</td><td>控制位是 1 才翻转目标位。<b>制造纠缠的核心</b></td></tr>
+        <tr><td>g10_cu1</td><td><b>CU1(θ)</b></td><td>受控涂色</td><td>控制位是 1 才涂色。QFT 全靠它</td></tr>
+        <tr><td>g11_swap</td><td><b>SWAP</b></td><td>换座位</td><td>两枚硬币交换位置。布线常用</td></tr>
+        <tr><td>g12_ccx</td><td><b>CCX</b></td><td>双开关</td><td>两个控制位都是 1 才翻转。<b>+H 能做任何量子计算</b></td></tr>
+      </tbody>
+    </table>
+    <p class="sub">一句话记忆：<b>X 翻面、H 抛起、S/T/RZ 涂色、RY 定角度、CX 联动、CCX 双联动、SWAP 换座、CU1 受控涂色</b></p>
+
+    <h3>4.2 九个算法</h3>
+    <table>
+      <thead><tr><th>ID</th><th>电路</th><th>通俗理解</th><th>为什么有意思</th></tr></thead>
+      <tbody>
+        <tr><td>a01_ghz3</td><td><b>GHZ-3</b></td><td>三枚硬币永远同面</td><td>测一个就知道另外两个</td></tr>
+        <tr><td>a02_cat4</td><td><b>猫态-4</b></td><td>四枚硬币永远同面</td><td>薛定谔的猫从 1 只变 4 只</td></tr>
+        <tr><td>a03_qft4</td><td><b>QFT-4</b></td><td>量子傅里叶变换</td><td>把"频率"翻译成"位置"，很多算法的地基</td></tr>
+        <tr><td>a04_grover2</td><td><b>Grover-2</b></td><td>4 个抽屉找目标</td><td>经典找 4 次，量子 1 次放大答案</td></tr>
+        <tr><td>a05_teleport3</td><td><b>隐形传态</b></td><td>量子传真机</td><td>不传物体，传"状态"，用纠缠当信道</td></tr>
+        <tr><td>a06_qft5</td><td><b>QFT-5</b></td><td>QFT 升到 5 比特</td><td>32 态均匀，测大电路转译能力</td></tr>
+        <tr><td>a07_grover3</td><td><b>Grover-3</b></td><td>8 个抽屉找目标</td><td>一次迭代目标概率放大到 78%</td></tr>
+        <tr><td>a08_toffoli3</td><td><b>Toffoli-3</b></td><td>双开关门</td><td>确定性 111，最简单可靠</td></tr>
+        <tr><td>a09_wstate3</td><td><b>W 态</b></td><td>恰好一盏灯亮</td><td>恰好一枚正面，与 GHZ 不同家族的纠缠</td></tr>
+      </tbody>
+    </table>
+    <p class="sub">算法 vs 门：门是"零件"（12 个），算法是"拼出来的机器"（9 台）。评测电路就是从这些机器里抽——不需要懂每台机器为什么这样工作，只需保证每个零件被忠实翻译。</p>
+  </div>
+
+  <h2 id="faq">五、常见问题</h2>
+  <div class="card">
+    <p class="faq-q">Q: 三后端结果为什么 fidelity 不是 1.0？</p>
+    <p>A: 采样噪声。8192 shots 下理论分布精确，实测有 ±1% 涨落，fidelity ≥ 0.97 即视为正确。</p>
+    <p class="faq-q">Q: braket 后端为什么慢？</p>
+    <p>A: braket 本地模拟器解析 OpenQASM 3，有额外转换开销。spinq/originq 直接吃 QASM 2，更快。</p>
+    <p class="faq-q">Q: 能上真机吗？</p>
+    <p>A: 当前版本用本地模拟器。真机需平台账号，API 已预留（backend_capabilities.json）。</p>
+  </div>
+
+  <h2 id="structure">六、目录结构</h2>
+  <div class="card">
+    <pre><code>LoomQ/
+├── loomq_lib/            # pip 可装工具包（尺子+三后端+电路库）
+│   └── loomq_lib/
+│       ├── semantics.py  # 尺子（qelib1.inc 语义模拟）
+│       ├── backends.py   # 三后端执行
+│       ├── circuits.py   # 21 电路库
+│       └── runner.py     # 统一执行入口
+├── starter_kit/          # 竞赛提交物（adapter/evaluator）
+├── tests/                # 测试套件（自检/对齐/探针）
+├── docs/                 # 文档
+└── prompts/              # LLM 提示词（可替换模块）</code></pre>
+  </div>
+</div>
+</body>
+</html>

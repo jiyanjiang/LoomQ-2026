@@ -1,0 +1,163 @@
+# LoomQ L1 测试问题集 v1
+#
+# 结构：
+#   - id:         用例编号
+#   - circuit:    circuits/ 下 qasm 文件（相对本文件目录）
+#   - kind:       类型
+#       gate   = 逐门确定性小电路（可手算）
+#       algo   = 标准算法电路（来自 QUANTUM_101 官方理想输出 或 QASMBench）
+#       random = 随机指令流（覆盖门集）
+#   - covers:     覆盖的 12 门白名单成员（用于覆盖度统计）
+#   - expected:   期望分布（归一化概率，确定性电路可手算；算法电路由 spinq 模拟器基准 + DS 审查确认）
+#   - sources:    来源（hand=手算 / spinq=模拟器基准 / qasmb=QASMBench / quant101=官方手册 / ds=DS审查）
+
+cases:
+  # ================= 逐门确定性电路（可手算） =================
+  - id: "g01_x"
+    circuit: "x_only.qasm"
+    kind: gate
+    covers: [x]
+    expected: {"01": 1.0}
+    sources: [hand]
+
+  - id: "g02_h"
+    circuit: "h_only.qasm"
+    kind: gate
+    covers: [h]
+    expected: {"0": 0.5, "1": 0.5}
+    sources: [hand]
+
+  - id: "g03_s"
+    circuit: "s_phase.qasm"
+    kind: gate
+    covers: [s]
+    expected: {"0": 1.0}   # s 相位门不影响 |0⟩ 测量分布
+    sources: [hand]
+
+  - id: "g04_sdg"
+    circuit: "sdg_phase.qasm"
+    kind: gate
+    covers: [sdg]
+    expected: {"0": 1.0}
+    sources: [hand]
+
+  - id: "g05_t"
+    circuit: "t_phase.qasm"
+    kind: gate
+    covers: [t]
+    expected: {"0": 1.0}
+    sources: [hand]
+
+  - id: "g06_tdg"
+    circuit: "tdg_phase.qasm"
+    kind: gate
+    covers: [tdg]
+    expected: {"0": 1.0}
+    sources: [hand]
+
+  - id: "g07_rz"
+    circuit: "rz_param.qasm"
+    kind: gate
+    covers: [rz]
+    expected: {"0": 1.0}   # rz(θ) 不改变 |0⟩ 测量分布
+    sources: [hand]
+
+  - id: "g08_ry"
+    circuit: "ry_param.qasm"
+    kind: gate
+    covers: [ry]
+    expected: {"0": 0.5, "1": 0.5}   # ry(π/2) 将 |0⟩ 翻到 X 轴方向，50/50
+    sources: [hand]
+
+  - id: "g09_cx"
+    circuit: "cx_bell.qasm"
+    kind: gate
+    covers: [cx]
+    expected: {"00": 0.5, "11": 0.5}
+    sources: [hand]
+
+  - id: "g10_cu1"
+    circuit: "cu1_param.qasm"
+    kind: gate
+    covers: [cu1]
+    expected: {"01": 1.0}   # cu1(θ) 作用在 |1⟩ 上，测量分布不变
+    sources: [hand]
+
+  - id: "g11_swap"
+    circuit: "swap_exchange.qasm"
+    kind: gate
+    covers: [swap]
+    expected: {"10": 1.0}   # x q[0]; swap q[0],q[1] → |1⟩ 到 q[1]，输出 "10"（c[1]=1,c[0]=0）
+    sources: [hand]
+
+  - id: "g12_ccx"
+    circuit: "ccx_toffoli.qasm"
+    kind: gate
+    covers: [ccx]
+    expected: {"111": 1.0}  # x q[0]; x q[1]; ccx q[0],q[1],q[2] → |111⟩
+    sources: [hand]
+
+  # ================= 标准算法电路 =================
+  - id: "a01_ghz3"
+    circuit: "ghz3.qasm"
+    kind: algo
+    covers: [h, cx]
+    expected: {"000": 0.5, "111": 0.5}
+    sources: [quant101]
+
+  - id: "a02_cat4"
+    circuit: "cat_state_n4.qasm"
+    kind: algo
+    covers: [h, cx]
+    expected: {"0000": 0.5, "1111": 0.5}
+    sources: [qasmb, hand]
+
+  - id: "a03_qft4"
+    circuit: "qft_n4.qasm"
+    kind: algo
+    covers: [h, x, cu1]
+    expected: null   # 待 spinq 模拟器基准 + DS 确认
+    sources: [qasmb, spinq, ds]
+
+  - id: "a04_grover2"
+    circuit: "grover_n2.qasm"
+    kind: algo
+    covers: [h, x, cx]
+    expected: null   # 待确认目标态
+    sources: [qasmb, spinq, ds]
+
+  - id: "a05_teleport3"
+    circuit: "teleportation_n3.qasm"
+    kind: algo
+    covers: [h, t, s, cx]
+    expected: null   # 待 spinq 模拟器基准
+    sources: [qasmb, spinq]
+
+  # ================= 扩展：更复杂电路（2026-08-18 新增） =================
+  - id: "a06_qft5"
+    circuit: "qft_n5.qasm"
+    kind: algo
+    covers: [h, x, cu1, swap]
+    expected: null   # 尺子现算（32 态均匀，各 3.125%）
+    sources: [generated, ruler]
+
+  - id: "a07_grover3"
+    circuit: "grover_n3.qasm"
+    kind: algo
+    covers: [h, x, ccx]
+    expected: null   # 尺子现算（目标 |100> 约 78.1%）
+    sources: [generated, ruler]
+
+  - id: "a08_toffoli3"
+    circuit: "toffoli_n3.qasm"
+    kind: algo
+    covers: [x, ccx]
+    expected: null   # 尺子现算（|111> 100%）
+    sources: [generated, ruler]
+
+  - id: "a09_wstate3"
+    circuit: "wstate_n3.qasm"
+    kind: algo
+    covers: [ry, x, cx]
+    expected: null   # 尺子现算（001/010/100 各 1/3）
+    sources: [generated, ruler, wikipedia]

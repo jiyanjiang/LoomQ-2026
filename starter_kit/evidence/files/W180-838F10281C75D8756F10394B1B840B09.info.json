@@ -1,0 +1,23 @@
+{
+  "task_id": "838F10281C75D8756F10394B1B840B09",
+  "experiment": "bellstate",
+  "machine": {
+    "chip_id": 180,
+    "name": "本源悟空 180（180 比特超导真机）"
+  },
+  "shots": 8192,
+  "task_name": "LoomQ_bellstate_v2_s8192",
+  "circuit": {
+    "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ncx q[0],q[1];\nmeasure q -> c;\n",
+    "qubits": 2,
+    "gates": [
+      "h",
+      "cx"
+    ]
+  },
+  "timestamps": {
+    "submitted_utc": "2026-08-19T16:31:42.857490+00:00",
+    "finished_utc": "2026-08-19T16:33:25.812534+00:00"
+  },
+  "status": "finished"
+}

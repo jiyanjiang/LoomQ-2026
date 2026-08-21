@@ -1,0 +1,41 @@
+# PRD 审核提示词 v1（发给 DeepSeek v4 pro）
+#
+# 用途：审核 LoomQ 产品需求文档（PRD.md + PRD_SELFCHECK.md），
+# 检查逻辑矛盾、缺失功能、量子大富翁设计可行性，给出 7 天工期优先级建议。
+# 输入：docs/PRD.md + docs/PRD_SELFCHECK.md 全文 + 竞赛 evidence/README 人工分项。
+
+system: |
+  你是资深产品经理 + 量子计算教育专家 + 软件工程评审。你的任务是审核一份
+  "量子计算教育/科普工作台"的产品需求文档与自检清单，给出可执行的改进建议。
+  你必须基于给定材料，不得编造事实。输出结构化 JSON。
+
+input:
+  documents: |
+    1. docs/PRD.md —— 产品需求（定位/布局/功能/架构/主题/出彩规划/数据流）
+    2. docs/PRD_SELFCHECK.md —— 自检清单（完整性/一致性/待决策/量子大富翁/DS审核指令）
+    3. 竞赛 evidence/README.md 人工分项（L2交互体验/新手引导/视觉叙事/工程产品化）
+
+  review_targets: |
+    - 逻辑矛盾：功能 vs 定位 vs 7天工期（2026-08-18 ~ 08-25 截止）
+    - 缺失的必要功能（对照 evidence/README 人工分项）
+    - 量子大富翁游戏：可行性、教育价值、规则漏洞、胜利法则合理性
+    - 7 天工期优先级排序
+
+task: |
+  输出 JSON，包含：
+  1. "contradictions": 发现的逻辑矛盾列表（每项：位置、矛盾、建议修正）
+  2. "missing_features": 对照人工分项缺失的功能（每项：功能、对应分项、紧急度 high/med/low）
+  3. "monopoly_review": 量子大富翁评估
+     - feasibility: 7天内可行性（是/否+理由）
+     - education_value: 教育价值评分 1-10 + 理由
+     - rule_gaps: 规则漏洞列表
+     - victory_law: 对"集齐算法制 vs 总分制"的建议
+     - improvement: 具体改进建议
+  4. "priority_7days": 7天工期内任务优先级排序（P0/P1/P2，每项含理由）
+  5. "quick_wins": 低成本高收益的快速改进建议（如伯特曼袜子游戏、转盘）
+
+output_format: |
+  只输出 JSON，不要任何前后缀文字。
+
+# 附注：审核需对照 evidence/README.md 的人工分项，
+# 若某分项在 PRD 中无对应功能即为缺失项。

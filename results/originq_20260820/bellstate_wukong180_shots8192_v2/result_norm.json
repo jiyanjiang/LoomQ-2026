@@ -1,0 +1,45 @@
+{
+  "experiment": "bellstate",
+  "backend": {
+    "sdk": "pyqpanda",
+    "chip_id": 180,
+    "machine_name": "本源悟空 180（180 比特超导真机）"
+  },
+  "circuit": {
+    "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ncx q[0],q[1];\nmeasure q -> c;\n",
+    "qubits": 2,
+    "gates": [
+      "h",
+      "cx"
+    ]
+  },
+  "shots": 8192,
+  "counts": {
+    "00": 4104,
+    "01": 0,
+    "10": 0,
+    "11": 4088
+  },
+  "probabilities": {
+    "00": 0.5010071,
+    "01": 3e-07,
+    "10": 5.4e-06,
+    "11": 0.498987
+  },
+  "metrics": {
+    "n_total": 8192,
+    "bell_ratio_00_11": 1.0,
+    "n_00": 4104,
+    "n_11": 4088,
+    "noise_01": 0,
+    "noise_10": 0
+  },
+  "task": {
+    "id": "838F10281C75D8756F10394B1B840B09",
+    "name": "LoomQ_bellstate_v2_s8192"
+  },
+  "timestamps": {
+    "submitted_utc": "2026-08-19T16:31:42.857490+00:00",
+    "finished_utc": "2026-08-19T16:33:25.812534+00:00"
+  }
+}

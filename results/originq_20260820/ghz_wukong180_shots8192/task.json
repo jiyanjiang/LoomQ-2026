@@ -1,0 +1,24 @@
+{
+  "task_id": "21F3E7FB2E0D12E0999E3C35E5473C7C",
+  "experiment": "ghz",
+  "machine": {
+    "chip_id": 180,
+    "name": "本源悟空 180（180 比特超导真机）"
+  },
+  "shots": 8192,
+  "task_name": "LoomQ_ghz_s8192",
+  "circuit": {
+    "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[3];\ncreg c[3];\nh q[0];\ncx q[0],q[1];\ncx q[0],q[2];\nmeasure q -> c;\n",
+    "qubits": 3,
+    "gates": [
+      "h",
+      "cx",
+      "cx"
+    ]
+  },
+  "timestamps": {
+    "submitted_utc": "2026-08-19T16:36:11.195662+00:00",
+    "finished_utc": "2026-08-19T16:37:15.942854+00:00"
+  },
+  "status": "finished"
+}

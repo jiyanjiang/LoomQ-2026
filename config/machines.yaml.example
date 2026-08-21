@@ -1,0 +1,71 @@
+# ============================================================
+# LoomQ 量子云机器注册表（模板）
+#
+# 用法：
+#   1. 复制为 config/machines.yaml 并填入真实值（真实文件已被 .gitignore 忽略，绝不提交）
+#   2. 新增厂商 = 在下方 machines 列表加一段 + 在 loomq_lib/machines/ 写对应 driver
+#      （driver 统一实现 submit/poll/parse/ping 四接口 + 能力声明）
+#
+# 字段说明：
+#   id      全局唯一 ID，路由/竞技场/日志统一用它
+#   driver  对应 loomq_lib/machines/<driver>_driver.py
+#   connect 认证方式按厂商不同：ssh_key（SpinQ 云）/ token（本源量子云）等
+# ============================================================
+
+machines:
+  # ---------- 量旋科技 SpinQ（核磁量子计算机，SSH 私钥认证）----------
+  - id: spinq_gemini_2q
+    name: "2Qubit核磁量子计算机"
+    vendor: "量旋科技 SpinQ"
+    phys: "NMR"                      # NMR / superconducting / ion_trap / photonic / neutral_atom
+    bits: 2
+    driver: "spinq"
+    connect:
+      type: ssh_key
+      host: "cloud.spinq.cn"
+      user: "YOUR_SPINQ_USERNAME"    # 真实账号填在 config/machines.yaml（本文件仅模板）
+      key_path: "~/.ssh/id_rsa"      # 平台注册公钥对应的私钥
+    defaults: {shots: 5000, max_shots: 8192}
+    gates: ["h", "cx", "x", "y", "z", "s", "t", "measure"]
+    status: available                # available / maintenance
+
+  - id: spinq_triangulum_3q
+    name: "3Qubit核磁量子计算机"
+    vendor: "量旋科技 SpinQ"
+    phys: "NMR"
+    bits: 3
+    driver: "spinq"
+    connect:
+      type: ssh_key
+      host: "cloud.spinq.cn"
+      user: "YOUR_SPINQ_USERNAME"
+      key_path: "~/.ssh/id_rsa"
+    defaults: {shots: 8192, max_shots: 8192}
+    gates: ["h", "cx", "x", "y", "z", "s", "t", "measure"]
+    status: available
+
+  # ---------- 本源量子 OriginQ（悟空 180，API Token 认证）----------
+  - id: wukong180
+    name: "本源悟空 180 超导量子计算机"
+    vendor: "本源量子 OriginQ"
+    phys: "superconducting"
+    bits: 180
+    driver: "originq"
+    connect:
+      type: token
+      token_env: "WUKONG_TOKEN"      # 真实 token 从环境变量注入；也可在 config/machines.yaml 直接写 token 字段
+    defaults: {shots: 8192, max_shots: 8192}
+    gates: ["h", "cx", "x", "y", "z", "s", "t", "measure"]
+    status: available
+
+  # ---------- 待接入（预注册占位，status: maintenance 表示未开通）----------
+  - id: ctq_tianyan                  # 中电信天衍（底层超导，国内可用）
+    name: "天衍量子计算云平台"
+    vendor: "中电信量子"
+    phys: "superconducting"
+    bits: 10
+    driver: "originq"                # 认证/协议待确认后替换
+    connect:
+      type: token
+      token_env: "CTQ_TOKEN"
+    status: maintenance

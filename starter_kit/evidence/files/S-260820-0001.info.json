@@ -1,0 +1,43 @@
+{
+  "task_code": "S-260820-0001",
+  "info": {
+    "status": 200,
+    "msg": "",
+    "task": {
+      "tid": 61360,
+      "tcode": "S-260820-0001",
+      "tname": "ghz3_triangulum_vp_s8192",
+      "bitNum": 3,
+      "clbitNum": 0,
+      "simulator": false,
+      "calcMatrix": false,
+      "runSimu": false,
+      "tstatus": "S",
+      "shots": 8192,
+      "sourceType": "spinqit",
+      "sourceOriginName": null,
+      "sourceAddr": "files-2026-08/S-260820-0001.qasm",
+      "sourceCode": "OPENQASM 2.0; \ninclude \"qelib1.inc\";\nqreg q[3];\n\nh q[0];\ncx q[0],q[1];\ncx q[1],q[2];",
+      "description": "LoomQ GHZ3 via SpinQit SDK, shots=8192, tag=default",
+      "createdTime": "2026-08-20T04:15:25.834+00:00",
+      "startTime": "2026-08-20T04:15:25.859+00:00",
+      "endTime": "2026-08-20T04:17:53.369+00:00",
+      "errorMsg": null,
+      "platformId": 6,
+      "platformName": "3Qubit核磁量子计算机",
+      "platformCode": "triangulum_vp",
+      "machineId": 8,
+      "machineCode": "Triangulum-pro-1",
+      "userId": "xxxx",
+      "userName": "xxxx",
+      "timecost": 3.0,
+      "curQueueSize": -1,
+      "percentageFinished": null
+    }
+  },
+  "status": {
+    "status": 200,
+    "msg": "",
+    "taskStatus": "S"
+  }
+}

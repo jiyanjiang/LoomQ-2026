@@ -1,0 +1,127 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic "首页" [ref=e4] [cursor=pointer]
+    - generic "电路库" [ref=e8] [cursor=pointer]
+    - generic "新电路（Composer）" [ref=e12] [cursor=pointer]
+    - generic "布洛赫球" [ref=e15] [cursor=pointer]
+    - generic "互动课程" [ref=e20] [cursor=pointer]
+    - generic "量子游戏" [ref=e25] [cursor=pointer]
+    - generic "使用帮助" [ref=e32] [cursor=pointer]
+    - generic "设置" [ref=e37] [cursor=pointer]
+  - generic [ref=e41]:
+    - dialog "新手引导" [ref=e45]:
+      - img [ref=e47]:
+        - generic [ref=e48]: q0
+        - generic [ref=e50]: H
+        - generic [ref=e52]: M
+        - generic [ref=e54]: c
+        - generic [ref=e55]: 搭好就能运行，边玩边学
+      - heading "欢迎来到量子工作台" [level=2] [ref=e56]
+      - paragraph [ref=e57]: 不用数学，像搭积木一样搭量子电路
+      - paragraph [ref=e58]: 不用数学，像搭积木一样搭量子电路，搭好就能运行。左边是电路画布，右边有 AI 助手，你说人话它就能帮你搭。哪怕从没学过量子，10 分钟也能跑通第一个实验。
+      - generic [ref=e70]:
+        - button "跳过引导" [ref=e71] [cursor=pointer]
+        - generic [ref=e72]:
+          - button "上一步" [disabled] [ref=e73] [cursor=pointer]
+          - button "下一步" [ref=e74] [cursor=pointer]
+    - generic [ref=e75]:
+      - generic [ref=e76]:
+        - heading "电路库" [level=2] [ref=e77]
+        - generic [ref=e78]:
+          - button "全部" [ref=e79] [cursor=pointer]
+          - button "单门" [ref=e80] [cursor=pointer]
+          - button "算法" [ref=e81] [cursor=pointer]
+      - generic [ref=e82]:
+        - generic [ref=e83] [cursor=pointer]:
+          - generic [ref=e84]: 门
+          - generic [ref=e85]: X 门
+        - generic [ref=e86] [cursor=pointer]:
+          - generic [ref=e87]: 门
+          - generic [ref=e88]: H 门
+        - generic [ref=e89] [cursor=pointer]:
+          - generic [ref=e90]: 门
+          - generic [ref=e91]: S 门
+        - generic [ref=e92] [cursor=pointer]:
+          - generic [ref=e93]: 门
+          - generic [ref=e94]: S† 门
+        - generic [ref=e95] [cursor=pointer]:
+          - generic [ref=e96]: 门
+          - generic [ref=e97]: T 门
+        - generic [ref=e98] [cursor=pointer]:
+          - generic [ref=e99]: 门
+          - generic [ref=e100]: T† 门
+        - generic [ref=e101] [cursor=pointer]:
+          - generic [ref=e102]: 门
+          - generic [ref=e103]: RZ(θ) 门
+        - generic [ref=e104] [cursor=pointer]:
+          - generic [ref=e105]: 门
+          - generic [ref=e106]: RY(θ) 门
+        - generic [ref=e107] [cursor=pointer]:
+          - generic [ref=e108]: 门
+          - generic [ref=e109]: CX 门
+        - generic [ref=e110] [cursor=pointer]:
+          - generic [ref=e111]: 门
+          - generic [ref=e112]: CU1(θ) 门
+        - generic [ref=e113] [cursor=pointer]:
+          - generic [ref=e114]: 门
+          - generic [ref=e115]: SWAP 门
+        - generic [ref=e116] [cursor=pointer]:
+          - generic [ref=e117]: 门
+          - generic [ref=e118]: CCX 门
+        - generic [ref=e119] [cursor=pointer]:
+          - generic [ref=e120]: 算法
+          - generic [ref=e121]: GHZ-3
+        - generic [ref=e122] [cursor=pointer]:
+          - generic [ref=e123]: 算法
+          - generic [ref=e124]: 猫态-4
+        - generic [ref=e125] [cursor=pointer]:
+          - generic [ref=e126]: 算法
+          - generic [ref=e127]: QFT-4
+        - generic [ref=e128] [cursor=pointer]:
+          - generic [ref=e129]: 算法
+          - generic [ref=e130]: Grover-2
+        - generic [ref=e131] [cursor=pointer]:
+          - generic [ref=e132]: 算法
+          - generic [ref=e133]: 隐形传态
+        - generic [ref=e134] [cursor=pointer]:
+          - generic [ref=e135]: 算法
+          - generic [ref=e136]: QFT-5
+        - generic [ref=e137] [cursor=pointer]:
+          - generic [ref=e138]: 算法
+          - generic [ref=e139]: Grover-3
+        - generic [ref=e140] [cursor=pointer]:
+          - generic [ref=e141]: 算法
+          - generic [ref=e142]: Toffoli-3
+        - generic [ref=e143] [cursor=pointer]:
+          - generic [ref=e144]: 算法
+          - generic [ref=e145]: W 态
+        - generic [ref=e146] [cursor=pointer]:
+          - generic [ref=e147]: 算法
+          - generic [ref=e148]: GHZ-5
+      - generic [ref=e149]:
+        - generic [ref=e150]: 运行机器：
+        - combobox [ref=e151] [cursor=pointer]:
+          - option "三后端（无噪声模拟）" [selected]
+          - option "理想机（对照）"
+          - option "链式机（99.5%）"
+          - option "棋盘机（99%）"
+          - option "噪声机（97%）"
+      - generic [ref=e152]:
+        - heading "X 门" [level=3] [ref=e153]
+        - paragraph [ref=e154]: 拨动开关。把 |0⟩ 变成 |1⟩，|1⟩ 变成 |0⟩，像反转硬币。
+        - paragraph [ref=e155]: 比喻：翻转硬币
+        - paragraph [ref=e156]: 彩蛋：X 门在经典世界对应的就是 NOT 门——唯一的量子比特反转开关。
+        - generic [ref=e157]:
+          - button "三后端运行" [ref=e158] [cursor=pointer]
+          - button "复制 QASM" [ref=e159] [cursor=pointer]
+        - img [ref=e161]:
+          - generic [ref=e163]: q[0]
+          - generic [ref=e164]: X
+        - textbox [ref=e167]: OPENQASM 2.0; include "qelib1.inc"; qreg q[1]; creg c[1]; x q[0]; measure q -> c;
+  - generic [ref=e168]:
+    - generic [ref=e169]: 执行过程
+    - generic [ref=e172]:
+      - generic [ref=e173]: 量子助手
+      - generic [ref=e175]:
+        - textbox "用自然语言描述想要的电路，例如：生成 3 比特 GHZ 态并全测量" [ref=e176]
+        - button "发送" [ref=e177] [cursor=pointer]

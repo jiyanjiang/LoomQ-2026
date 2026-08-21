@@ -1,0 +1,53 @@
+{
+  "experiment": "ghz",
+  "backend": {
+    "sdk": "pyqpanda",
+    "chip_id": 180,
+    "machine_name": "本源悟空 180（180 比特超导真机）"
+  },
+  "circuit": {
+    "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[3];\ncreg c[3];\nh q[0];\ncx q[0],q[1];\ncx q[0],q[2];\nmeasure q -> c;\n",
+    "qubits": 3,
+    "gates": [
+      "h",
+      "cx",
+      "cx"
+    ]
+  },
+  "shots": 8192,
+  "counts": {
+    "000": 4141,
+    "001": 1,
+    "010": 0,
+    "011": 0,
+    "100": 1,
+    "101": 0,
+    "110": 4,
+    "111": 4045
+  },
+  "probabilities": {
+    "000": 0.5055311,
+    "001": 8.26e-05,
+    "010": 7e-07,
+    "011": 0.0,
+    "100": 0.000143,
+    "101": 1.2e-06,
+    "110": 0.0004589,
+    "111": 0.4937822
+  },
+  "metrics": {
+    "n_total": 8192,
+    "ghz_ratio_000_111": 0.999268,
+    "n_000": 4141,
+    "n_111": 4045,
+    "noise_other": 6
+  },
+  "task": {
+    "id": "21F3E7FB2E0D12E0999E3C35E5473C7C",
+    "name": "LoomQ_ghz_s8192"
+  },
+  "timestamps": {
+    "submitted_utc": "2026-08-19T16:36:11.195662+00:00",
+    "finished_utc": "2026-08-19T16:37:15.942854+00:00"
+  }
+}

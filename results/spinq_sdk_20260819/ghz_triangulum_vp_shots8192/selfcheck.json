@@ -1,0 +1,40 @@
+{
+  "overall_pass": true,
+  "checks": [
+    {
+      "item": "产物存在 circuit.qasm",
+      "pass": true,
+      "detail": "存在"
+    },
+    {
+      "item": "产物存在 result_raw.json",
+      "pass": true,
+      "detail": "存在"
+    },
+    {
+      "item": "产物存在 result_norm.json",
+      "pass": true,
+      "detail": "存在"
+    },
+    {
+      "item": "counts 合计 ≈ shots (允许±1硬件偏差)",
+      "pass": true,
+      "detail": "合计 8193 vs shots 8192 (偏差 1)"
+    },
+    {
+      "item": "shots 平台返回 == 提交值",
+      "pass": true,
+      "detail": "8192 vs 8192"
+    },
+    {
+      "item": "GHZ 保真度 (000+111)/N > 50%",
+      "pass": true,
+      "detail": "74.9542%"
+    },
+    {
+      "item": "噪声位串占比 < 50%",
+      "pass": true,
+      "detail": "2052 (25.0458%) 噪声: {'011': 629, '110': 130, '001': 260, '100': 444, '101': 292, '010': 297}"
+    }
+  ]
+}

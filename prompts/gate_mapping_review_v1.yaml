@@ -1,0 +1,102 @@
+# 门映射审查提示词 v1（发给 DeepSeek v4 pro）
+#
+# 用途：LoomQ 竞赛 L1 的 transpile() 门映射正确性确认。
+# 输入：12 门白名单 + 三后端契约 + 实测支持矩阵。
+# 输出：结构化 JSON（36 格逐项判定 + 修改建议），供写验收报告并据此实现 adapter。
+
+# ---------- 系统角色 ----------
+system: |
+  你是量子编译与 OpenQASM 标准专家。你的任务是对一份"门映射表"做逐项审查，
+  判定每个后端对 12 门白名单的支持与映射是否正确。你只依据给定的事实材料作答，
+  不得编造未提供的门名或 API。你的判断必须区分两件事：
+  (1) target_ir_contract.md 约定的"评测器解析格式"；
+  (2) 本地 SDK（spinqit 0.2.4 / pyqpanda 3.8.5 / amazon-braket 1.95.0+1.27.0）的实际接受能力。
+  两者不一致时，必须明确指出，并给出 transpile() 应输出哪种、run() 走哪条路径。
+
+# ---------- 输入材料 ----------
+input:
+  gate_whitelist_12: [h, x, s, sdg, t, tdg, "rz(θ)", "ry(θ)", cx, "cu1(θ)", swap, ccx]
+  note: "正式评测电路（含隐藏/评测日变体）只使用这 12 门。"
+
+  contract_spinq: "transpile 输出完整可执行 OpenQASM 2.0；门集与 12 门白名单一致；含寄存器声明与测量。"
+  contract_braket: |
+    transpile 输出完整 OpenQASM 3：
+    OPENQASM 3.0;
+    include "stdgates.inc";
+    qubit[2] q; bit[2] c;
+    h q[0]; cnot q[0], q[1]; c = measure q;
+    评测器接受 cx 或 cnot，以及整寄存器或逐位测量。
+  contract_originq: |
+    transpile 输出 OriginIR 文本：
+    QINIT 2
+    CREG 2
+    H q[0]
+    CNOT q[0], q[1]
+    MEASURE q[0], c[0]
+    MEASURE q[1], c[1]
+    允许门名：H X S SDAG T TDAG RY RZ CNOT CU1/CR SWAP TOFFOLI/CCX。
+    参数门同时接受 RY(θ) q[0] 与 RY q[0],(θ)。
+
+  measured_matrix: |
+    【spinq】get_compiler("qasm") 逐门编译实测：12 门全部原生同名支持（h/x/s/sdg/t/tdg/rz/ry/cx/cu1/swap/ccx 全 OK）。
+    【braket】braket_gates.inc 门名实测：
+      h/x/s/t/swap 同名 OK；cx→必须 cnot（cx 报 "Gate cx is not defined"）；
+      sdg→si（sdg 报未定义）；tdg→ti；cu1→cphaseshift(θ)（无 cu1）；
+      ccx→ccnot；rz/ry/rx(θ) 原生 OK。
+      include "stdgates.inc" 在本地不存在，须改用 braket_gates.inc 绝对路径。
+    【originq】run() 真实路径 convert_qasm_string_to_qprog（QASM 2.0）12 门全 OK；
+      transpile 输出 OriginIR 实测：
+      H X S T CNOT SWAP TOFFOLI OK；
+      SDAG/TDAG 报 "UserDefinedGate undefined"（契约允许但 pyqpanda 3.8.5 不认）；
+      RZ(0.5) 第一格式语法错误，必须 RZ q[0],(0.5) 第二格式（RY 同）；
+      CU1(0.4) 第一格式失败，U1 q[0],(0.4) 可解析。
+
+  gate_identities: |
+    参考恒等式（gate_identities.md）：
+    z=u1(π); s=u1(π/2); sdg=u1(-π/2); t=u1(π/4); tdg=u1(-π/4);
+    rz(θ) 作单比特门时与 u1(θ) 互换（差全局相位），受控分解中不可互换；
+    swap=3 个 cx；cu1(θ)=u1(θ/2)+cx+u1(-θ/2)+cx+u1(θ/2)；
+    ccx（Toffoli）标准分解：h+cx+tdg+cx+t+cx+tdg+cx+t+t+h+cx+t+tdg+cx；
+    ry(θ)=sdg+h+rz(θ)+h+s，或 ry(θ)=u3(θ,0,0)。
+
+# ---------- 任务 ----------
+task: |
+  逐项审查以下 36 格映射，输出 JSON。
+
+  对每格给出 verdict，取值：
+    "native"  = transpile 输出同名即可，SDK 原生支持；
+    "rename"  = 需改门名（给出正确的目标门名）；
+    "decompose" = SDK 不支持，需按恒等式分解为基础门；
+    "fmt_only" = 门名相同但参数/调用格式必须变化（如 OriginIR 第二参数格式）；
+    "error"   = 该映射有误或无法实现（必须说明）。
+
+  额外必须回答的问题：
+  q1: originq 的 transpile 应输出契约格式门名（SDAG/TDAG/CU1）还是本地可解析的替代
+      （U1）？给出理由与对评测器解析的影响。
+  q2: braket 的 cu1(θ)→cphaseshift(θ) 相位语义是否与 QASM2 的 cu1(θ) 完全一致？
+      cphaseshift 是否带全局相位差异？是否影响测量分布？
+  q3: originq 参数门第二格式 "RZ q[0],(0.5)" 是否就是契约文档允许的 "RY q[k],(θ)" 写法？
+      transpile 输出它，评测器按契约能否解析？
+  q4: spinq 是否真如实测所示 12 门全部零映射？有无隐藏坑（如 cu1 相位约定）？
+  q5: 三后端的 transpile 门名/格式，哪些还与 gate_identities.md 恒等式冲突？
+  q6: 汇总"最终采纳的 transpile 门名映射规则"（12 门 × 3 后端），供直接编码。
+
+# ---------- 输出格式（必须严格遵守） ----------
+output_format: |
+  只输出一个 JSON 对象，不要任何前后缀文字或代码块标记。
+  {
+    "matrix": {
+      "<gate>": {
+        "spinq": {"verdict": "...", "target_gate": "...", "note": "..."},
+        "braket": {"verdict": "...", "target_gate": "...", "note": "..."},
+        "originq_transpile": {"verdict": "...", "target_gate": "...", "note": "..."},
+        "originq_run": {"verdict": "...", "target_gate": "...", "note": "..."}
+      }, ...
+    },
+    "answers": {"q1": "...", "q2": "...", "q3": "...", "q4": "...", "q5": "...", "q6": "..."},
+    "summary": {
+      "confirmed": ["<格ID，如 h:spinq>", ...],
+      "corrected": ["<原判定有误的格，说明>", ...],
+      "adapter_changes": ["<adapter.py 需改动的清单>", ...]
+    }
+  }

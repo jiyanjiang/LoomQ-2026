@@ -1,0 +1,887 @@
+{
+  "cases": [
+    {
+      "id": "g01_x",
+      "kind": "gate",
+      "circuit": "x_only.qasm",
+      "covers": [
+        "x"
+      ],
+      "reference": {
+        "1": 1.0
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "1": 8192
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "1": 8192
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "1": 8192
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "g02_h",
+      "kind": "gate",
+      "circuit": "h_only.qasm",
+      "covers": [
+        "h"
+      ],
+      "reference": {
+        "0": 0.5,
+        "1": 0.5
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 4096,
+            "1": 4096
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 0.9978,
+          "counts_sample": {
+            "0": 4071,
+            "1": 4121
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 0.9906,
+          "counts_sample": {
+            "0": 3987,
+            "1": 4205
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "g03_s",
+      "kind": "gate",
+      "circuit": "s_phase.qasm",
+      "covers": [
+        "s"
+      ],
+      "reference": {
+        "0": 1.0
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "g04_sdg",
+      "kind": "gate",
+      "circuit": "sdg_phase.qasm",
+      "covers": [
+        "sdg"
+      ],
+      "reference": {
+        "0": 1.0
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "g05_t",
+      "kind": "gate",
+      "circuit": "t_phase.qasm",
+      "covers": [
+        "t"
+      ],
+      "reference": {
+        "0": 1.0
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "g06_tdg",
+      "kind": "gate",
+      "circuit": "tdg_phase.qasm",
+      "covers": [
+        "tdg"
+      ],
+      "reference": {
+        "0": 1.0
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "g07_rz",
+      "kind": "gate",
+      "circuit": "rz_param.qasm",
+      "covers": [
+        "rz"
+      ],
+      "reference": {
+        "0": 1.0
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 8192
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "g08_ry",
+      "kind": "gate",
+      "circuit": "ry_param.qasm",
+      "covers": [
+        "ry"
+      ],
+      "reference": {
+        "0": 0.5,
+        "1": 0.5
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0": 4096,
+            "1": 4096
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 0.9979,
+          "counts_sample": {
+            "0": 4072,
+            "1": 4120
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 0.9998,
+          "counts_sample": {
+            "0": 4098,
+            "1": 4094
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "g09_cx",
+      "kind": "gate",
+      "circuit": "cx_bell.qasm",
+      "covers": [
+        "cx"
+      ],
+      "reference": {
+        "00": 0.5,
+        "11": 0.5
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "00": 4096,
+            "11": 4096
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 0.9965,
+          "counts_sample": {
+            "00": 4056,
+            "11": 4136
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 0.9993,
+          "counts_sample": {
+            "00": 4104,
+            "11": 4088
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "g10_cu1",
+      "kind": "gate",
+      "circuit": "cu1_param.qasm",
+      "covers": [
+        "cu1"
+      ],
+      "reference": {
+        "01": 1.0
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "01": 8192
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "01": 8192
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "01": 8192
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "g11_swap",
+      "kind": "gate",
+      "circuit": "swap_exchange.qasm",
+      "covers": [
+        "swap"
+      ],
+      "reference": {
+        "10": 1.0
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "10": 8192
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "10": 8192
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "10": 8192
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "g12_ccx",
+      "kind": "gate",
+      "circuit": "ccx_toffoli.qasm",
+      "covers": [
+        "ccx"
+      ],
+      "reference": {
+        "111": 1.0
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "111": 8192
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "111": 8192
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "111": 8192
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "a01_ghz3",
+      "kind": "algo",
+      "circuit": "ghz3.qasm",
+      "covers": [
+        "h",
+        "cx"
+      ],
+      "reference": {
+        "000": 0.5,
+        "111": 0.5
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "000": 4096,
+            "111": 4096
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 0.9991,
+          "counts_sample": {
+            "000": 4106,
+            "111": 4086
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 0.9974,
+          "counts_sample": {
+            "000": 4066,
+            "111": 4126
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "a02_cat4",
+      "kind": "algo",
+      "circuit": "cat_state_n4.qasm",
+      "covers": [
+        "h",
+        "cx"
+      ],
+      "reference": {
+        "0000": 0.5,
+        "1111": 0.5
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0000": 4096,
+            "1111": 4096
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 0.9968,
+          "counts_sample": {
+            "0000": 4059,
+            "1111": 4133
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 0.9983,
+          "counts_sample": {
+            "1111": 4076,
+            "0000": 4116
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "a03_qft4",
+      "kind": "algo",
+      "circuit": "qft_n4.qasm",
+      "covers": [
+        "h",
+        "x",
+        "cu1"
+      ],
+      "reference": {
+        "0000": 0.0625,
+        "1000": 0.0625,
+        "0100": 0.0625,
+        "1100": 0.0625,
+        "0010": 0.0625,
+        "1010": 0.0625,
+        "0110": 0.0625,
+        "1110": 0.0625,
+        "0001": 0.0625,
+        "1001": 0.0625,
+        "0101": 0.0625,
+        "1101": 0.0625,
+        "0011": 0.0625,
+        "1011": 0.0625,
+        "0111": 0.0625,
+        "1111": 0.0625
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "0000": 512,
+            "1000": 512,
+            "0100": 512,
+            "1100": 512
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 0.9845,
+          "counts_sample": {
+            "0000": 510,
+            "0001": 529,
+            "0010": 502,
+            "0011": 530
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 0.9767,
+          "counts_sample": {
+            "1100": 483,
+            "0010": 531,
+            "0101": 529,
+            "1111": 507
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "a04_grover2",
+      "kind": "algo",
+      "circuit": "grover_n2.qasm",
+      "covers": [
+        "h",
+        "x",
+        "cx"
+      ],
+      "reference": {
+        "11": 1.0
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "11": 8192
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "11": 8192
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "11": 8192
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "a05_teleport3",
+      "kind": "algo",
+      "circuit": "teleportation_n3.qasm",
+      "covers": [
+        "h",
+        "t",
+        "s",
+        "cx"
+      ],
+      "reference": {
+        "000": 0.213388347648,
+        "100": 0.036611652352,
+        "010": 0.036611652352,
+        "110": 0.213388347648,
+        "001": 0.213388347648,
+        "101": 0.036611652352,
+        "011": 0.036611652352,
+        "111": 0.213388347648
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "000": 1748,
+            "100": 300,
+            "010": 300,
+            "110": 1748
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 0.9873,
+          "counts_sample": {
+            "000": 1757,
+            "001": 1659,
+            "010": 293,
+            "011": 291
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 0.9924,
+          "counts_sample": {
+            "000": 1772,
+            "001": 1753,
+            "111": 1739,
+            "010": 303
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "a06_qft5",
+      "kind": "algo",
+      "circuit": "qft_n5.qasm",
+      "covers": [
+        "h",
+        "x",
+        "cu1",
+        "swap"
+      ],
+      "reference": {
+        "00000": 0.03125,
+        "10000": 0.03125,
+        "01000": 0.03125,
+        "11000": 0.03125,
+        "00100": 0.03125,
+        "10100": 0.03125,
+        "01100": 0.03125,
+        "11100": 0.03125,
+        "00010": 0.03125,
+        "10010": 0.03125,
+        "01010": 0.03125,
+        "11010": 0.03125,
+        "00110": 0.03125,
+        "10110": 0.03125,
+        "01110": 0.03125,
+        "11110": 0.03125,
+        "00001": 0.03125,
+        "10001": 0.03125,
+        "01001": 0.03125,
+        "11001": 0.03125,
+        "00101": 0.03125,
+        "10101": 0.03125,
+        "01101": 0.03125,
+        "11101": 0.03125,
+        "00011": 0.03125,
+        "10011": 0.03125,
+        "01011": 0.03125,
+        "11011": 0.03125,
+        "00111": 0.03125,
+        "10111": 0.03125,
+        "01111": 0.03125,
+        "11111": 0.03125
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "00000": 256,
+            "10000": 256,
+            "01000": 256,
+            "11000": 256
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 0.972,
+          "counts_sample": {
+            "00000": 245,
+            "00001": 200,
+            "00010": 233,
+            "00011": 266
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 0.9777,
+          "counts_sample": {
+            "10011": 244,
+            "01110": 263,
+            "10000": 280,
+            "11001": 261
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "a07_grover3",
+      "kind": "algo",
+      "circuit": "grover_n3.qasm",
+      "covers": [
+        "h",
+        "x",
+        "ccx"
+      ],
+      "reference": {
+        "000": 0.03125,
+        "100": 0.78125,
+        "010": 0.03125,
+        "110": 0.03125,
+        "001": 0.03125,
+        "101": 0.03125,
+        "011": 0.03125,
+        "111": 0.03125
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "000": 256,
+            "100": 6400,
+            "010": 256,
+            "110": 256
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 0.9915,
+          "counts_sample": {
+            "000": 257,
+            "001": 271,
+            "010": 241,
+            "011": 247
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 0.9878,
+          "counts_sample": {
+            "100": 6331,
+            "011": 237,
+            "111": 278,
+            "101": 256
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "a08_toffoli3",
+      "kind": "algo",
+      "circuit": "toffoli_n3.qasm",
+      "covers": [
+        "x",
+        "ccx"
+      ],
+      "reference": {
+        "111": 1.0
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "111": 8192
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "111": 8192
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 1.0,
+          "counts_sample": {
+            "111": 8192
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "a09_wstate3",
+      "kind": "algo",
+      "circuit": "wstate_n3.qasm",
+      "covers": [
+        "ry",
+        "x",
+        "cx"
+      ],
+      "reference": {
+        "100": 0.333333333333,
+        "010": 0.333333333333,
+        "001": 0.333333333333
+      },
+      "targets": {
+        "spinq": {
+          "status": "PASS",
+          "fidelity": 0.9999,
+          "counts_sample": {
+            "100": 2731,
+            "010": 2731,
+            "001": 2730
+          }
+        },
+        "originq": {
+          "status": "PASS",
+          "fidelity": 0.9933,
+          "counts_sample": {
+            "001": 2756,
+            "010": 2659,
+            "100": 2777
+          }
+        },
+        "braket": {
+          "status": "PASS",
+          "fidelity": 0.9954,
+          "counts_sample": {
+            "100": 2699,
+            "001": 2713,
+            "010": 2780
+          }
+        }
+      },
+      "status": "PASS"
+    }
+  ],
+  "summary": {
+    "total": 63,
+    "passed": 63,
+    "failed": 0,
+    "cases_total": 21,
+    "cases_passed": 21
+  }
+}

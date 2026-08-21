@@ -1,0 +1,20 @@
+{
+  "task_code": "G-260819-0003",
+  "result": {
+    "status": 200,
+    "msg": "",
+    "taskStatus": "S",
+    "taskErrMsg": null,
+    "run": {
+      "realMatrix": null,
+      "imagMatrix": null,
+      "module": {
+        "00": 0.42921429,
+        "11": 0.44875292,
+        "01": 0.08713478,
+        "10": 0.03489801
+      }
+    },
+    "shots": 16384
+  }
+}

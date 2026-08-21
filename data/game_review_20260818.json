@@ -1,0 +1,93 @@
+{
+  "best_choice": {
+    "choice": "B 量子转盘",
+    "reason": "实现最快（半天）、教学直观（叠加态与概率测量）、互动性强（角度滑块+实时可视化），且复用现有 RY 门与布洛赫球基础，适合作为首个出彩功能。"
+  },
+  "monopoly_verdict": {
+    "worth_doing": true,
+    "reason": "教学深度最高（门→算法→复杂度），互动性强，且单机简化版在 3-4 天内可完成；与 B 转盘、D 闯关形成互补（B 单门直觉、D 线性关卡、C 策略收集）。",
+    "rule_gaps": [
+      "缺少门卡获取的随机性控制：需保证玩家不会因骰子运气长期拿不到关键门（如 ccx）而无法拼出任何算法。",
+      "缺少算法拼装失败或重复拼装的惩罚/收益规则。",
+      "缺少机器玩家 AI 的简单策略说明（如何选择拼算法或结束回合）。",
+      "缺少门卡数量上限与弃牌机制。"
+    ],
+    "win_condition_impl": {
+      "method": "集齐指定 3 个算法（如 Bell + GHZ + QFT）即获胜；或总分制模式（可选）。",
+      "algorithm_validation": "玩家从门库拖入门槽，系统实时检查门序列是否与预定义算法模板匹配（顺序无关，但门种类和数量必须一致）。匹配成功则点亮算法卡片，并显示复杂度得分。",
+      "template_matching": "使用 loomq_lib.circuits 中算法定义的门列表作为模板，忽略门顺序，仅校验多集相等。"
+    },
+    "complexity_scoring": {
+      "Bell-2": 1,
+      "GHZ-3": 2,
+      "GHZ-5": 3,
+      "W态": 3,
+      "Toffoli-3": 3,
+      "Grover-2": 3,
+      "隐形传态": 4,
+      "QFT-4": 5,
+      "QFT-5": 6,
+      "Grover-3": 5,
+      "猫态-4": 2
+    }
+  },
+  "more_algorithms": {
+    "priority_order": [
+      "Deutsch-Jozsa",
+      "Bernstein-Vazirani",
+      "SWAP test",
+      "量子加法定则",
+      "Shor-2(演示)"
+    ],
+    "reason": "Deutsch-Jozsa 和 Bernstein-Vazirani 是经典量子加速演示，教学价值高且电路简单；SWAP test 与量子加法定则适合中级；Shor-2 仅作演示，复杂度高。"
+  },
+  "execution_order": [
+    {
+      "day": "08-18",
+      "task": "B 量子转盘（RY 角度滑块 + 布洛赫球箭头 + 概率显示）",
+      "duration": "0.5 天"
+    },
+    {
+      "day": "08-19",
+      "task": "D 量子闯关（L1 H门50/50、L2 Bell、L3 GHZ、L4 QFT 认识）",
+      "duration": "2 天"
+    },
+    {
+      "day": "08-21",
+      "task": "C 量子大富翁简化版（单机 1真人vs3机器，集齐算法制）",
+      "duration": "3 天"
+    },
+    {
+      "day": "08-24",
+      "task": "A 伯特曼袜子（纠缠配对）作为补充小游戏",
+      "duration": "1 天"
+    },
+    {
+      "day": "08-25",
+      "task": "整体测试、修复、文档更新",
+      "duration": "0.5 天"
+    }
+  ],
+  "win_condition": {
+    "A": {
+      "reasonable": true,
+      "suggestion": "翻错扣分可能导致玩家保守，建议改为翻错不扣分但失去回合，或扣少量分并设置最低分保护。"
+    },
+    "B": {
+      "reasonable": true,
+      "suggestion": "连续命中 N 个目标角度得高分，建议增加时间压力或错误惩罚，避免玩家无限试错。"
+    },
+    "C": {
+      "reasonable": true,
+      "suggestion": "集齐指定 3 个算法为冠军，建议明确算法组合（如 Bell+GHZ+QFT）并允许玩家在游戏开始前选择目标组合。"
+    },
+    "D": {
+      "reasonable": true,
+      "suggestion": "通关 N 关解锁成就，建议增加星级评价（如保真度≥0.97 得三星），激励玩家优化电路。"
+    },
+    "E": {
+      "reasonable": true,
+      "suggestion": "用更少次数找到宝藏者胜，建议增加量子 vs 经典对战模式，并明确量子次数计算方式（迭代次数 vs 测量次数）。"
+    }
+  }
+}

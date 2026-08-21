@@ -1,0 +1,572 @@
+{
+  "saved_at_utc": "2026-08-19T15:52:23.636459+00:00",
+  "msgpack": {
+    "task_result_G-260819-0003.msgpack": {
+      "bytes": 49,
+      "data": {
+        "00": 0.42921429,
+        "01": 0.08713478,
+        "10": 0.03489801,
+        "11": 0.44875292
+      }
+    },
+    "task_result_S-260819-0001.msgpack": {
+      "bytes": 105,
+      "data": {
+        "000": 0.34673944,
+        "001": 0.07445079,
+        "010": 0.02560872,
+        "011": 0.06316109,
+        "100": 0.00813964,
+        "101": 0.04899294,
+        "110": 0.04027409,
+        "111": 0.39263329
+      }
+    }
+  },
+  "origin_results": {
+    "task-detail-06C3076EF744BCD36C8129D553171EDB-1787151328681.json": {
+      "createTime": "2026-08-19 22:54:35.223",
+      "endTime": "2026-08-19 22:54:41.815",
+      "machineTime": "1.82",
+      "result": {
+        "value": [
+          0.473,
+          0.0136,
+          0.0036,
+          0.0352,
+          0.0262,
+          0.0079999,
+          0.0152,
+          0.4252
+        ],
+        "key": [
+          "000",
+          "001",
+          "010",
+          "011",
+          "100",
+          "101",
+          "110",
+          "111"
+        ]
+      },
+      "status": "Completed",
+      "taskId": "06C3076EF744BCD36C8129D553171EDB"
+    },
+    "task-detail-E7599A00AAFF3056D31D26653D6D2444-1787151052296.json": {
+      "createTime": "2026-08-19 22:49:07.153",
+      "endTime": "2026-08-19 22:49:10.297",
+      "machineTime": "1.85",
+      "result": {
+        "value": [
+          0.4825999,
+          0.0298,
+          0.0142,
+          0.4734
+        ],
+        "key": [
+          "00",
+          "01",
+          "10",
+          "11"
+        ]
+      },
+      "status": "Completed",
+      "taskId": "E7599A00AAFF3056D31D26653D6D2444"
+    }
+  },
+  "evidence": {
+    "G-260819-0003.info.json": {
+      "task_code": "G-260819-0003",
+      "info": {
+        "status": 200,
+        "msg": "",
+        "task": {
+          "tid": 61349,
+          "tcode": "G-260819-0003",
+          "tname": "未命名实验",
+          "bitNum": 2,
+          "clbitNum": 0,
+          "simulator": false,
+          "calcMatrix": false,
+          "runSimu": true,
+          "tstatus": "S",
+          "shots": 16384,
+          "sourceType": "circuitBoard",
+          "sourceOriginName": null,
+          "sourceAddr": "files-2026-08/G-260819-0003.qasm",
+          "sourceCode": "OPENQASM 2.0; \ninclude \"qelib1.inc\";\nqreg q[2];\n\nh q[0];\ncx q[0],q[1];",
+          "description": "",
+          "createdTime": "2026-08-19T13:46:05.578+00:00",
+          "startTime": "2026-08-19T13:46:11.241+00:00",
+          "endTime": "2026-08-19T13:47:44.627+00:00",
+          "errorMsg": null,
+          "platformId": 1,
+          "platformName": "2Qubit核磁量子计算机",
+          "platformCode": "gemini_vp",
+          "machineId": 10,
+          "machineCode": "Gemini-pro-1",
+          "userId": "xxxx",
+          "userName": "xxxx",
+          "timecost": 3.0,
+          "curQueueSize": -1,
+          "percentageFinished": null
+        }
+      },
+      "status": {
+        "status": 200,
+        "msg": "",
+        "taskStatus": "S"
+      }
+    },
+    "G-260819-0003.result.json": {
+      "task_code": "G-260819-0003",
+      "result": {
+        "status": 200,
+        "msg": "",
+        "taskStatus": "S",
+        "taskErrMsg": null,
+        "run": {
+          "realMatrix": null,
+          "imagMatrix": null,
+          "module": {
+            "00": 0.42921429,
+            "11": 0.44875292,
+            "01": 0.08713478,
+            "10": 0.03489801
+          }
+        },
+        "shots": 16384
+      }
+    },
+    "S-260819-0001.info.json": {
+      "task_code": "S-260819-0001",
+      "info": {
+        "status": 200,
+        "msg": "",
+        "task": {
+          "tid": 61350,
+          "tcode": "S-260819-0001",
+          "tname": "GHZ state",
+          "bitNum": 3,
+          "clbitNum": 0,
+          "simulator": false,
+          "calcMatrix": false,
+          "runSimu": true,
+          "tstatus": "S",
+          "shots": 16384,
+          "sourceType": "circuitBoard",
+          "sourceOriginName": null,
+          "sourceAddr": "files-2026-08/S-260819-0001.qasm",
+          "sourceCode": "OPENQASM 2.0; \ninclude \"qelib1.inc\";\nqreg q[3];\n\nh q[0];\ncx q[0],q[1];\ncx q[1],q[2];",
+          "description": "",
+          "createdTime": "2026-08-19T13:51:56.016+00:00",
+          "startTime": "2026-08-19T13:54:29.147+00:00",
+          "endTime": "2026-08-19T13:56:56.473+00:00",
+          "errorMsg": null,
+          "platformId": 6,
+          "platformName": "3Qubit核磁量子计算机",
+          "platformCode": "triangulum_vp",
+          "machineId": 8,
+          "machineCode": "Triangulum-pro-1",
+          "userId": "xxxx",
+          "userName": "xxxx",
+          "timecost": 3.0,
+          "curQueueSize": -1,
+          "percentageFinished": null
+        }
+      },
+      "status": {
+        "status": 200,
+        "msg": "",
+        "taskStatus": "S"
+      }
+    },
+    "S-260819-0001.result.json": {
+      "task_code": "S-260819-0001",
+      "result": {
+        "status": 200,
+        "msg": "",
+        "taskStatus": "S",
+        "taskErrMsg": null,
+        "run": {
+          "realMatrix": null,
+          "imagMatrix": null,
+          "module": {
+            "000": 0.34673944,
+            "011": 0.06316109,
+            "110": 0.04027409,
+            "001": 0.07445079,
+            "100": 0.00813964,
+            "111": 0.39263329,
+            "101": 0.04899294,
+            "010": 0.02560872
+          }
+        },
+        "shots": 16384
+      }
+    }
+  },
+  "sdk": {
+    "bellstate_gemini_vp_shots5000": {
+      "circuit.qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ncx q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\n",
+      "result_norm.json": {
+        "experiment": "bellstate",
+        "backend": {
+          "sdk": "spinqit",
+          "platform_code": "gemini_vp",
+          "platform_name": "2Qubit核磁量子计算机"
+        },
+        "circuit": {
+          "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ncx q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\n",
+          "qubits": 2,
+          "gates": [
+            "h",
+            "cx"
+          ]
+        },
+        "shots": 5000,
+        "counts": {
+          "00": 2263,
+          "11": 2063,
+          "01": 408,
+          "10": 266
+        },
+        "probabilities": {
+          "00": 0.4525253,
+          "11": 0.41263927,
+          "01": 0.08169256,
+          "10": 0.05314287
+        },
+        "metrics": {
+          "n_total": 5000,
+          "bell_ratio_00_11": 0.8652,
+          "n_00": 2263,
+          "n_11": 2063,
+          "noise_01": 408,
+          "noise_10": 266
+        },
+        "task": {
+          "code": "G-260819-0004",
+          "name": null
+        },
+        "timestamps": {
+          "submitted_utc": "2026-08-19T15:08:08.597995+00:00",
+          "finished_utc": "2026-08-19T15:09:47.119604+00:00"
+        }
+      },
+      "result_raw.json": {
+        "task_code": "G-260819-0004",
+        "task_name": null,
+        "platform": null,
+        "machine_pcode": "gemini_vp",
+        "machine_name": "2Qubit核磁量子计算机",
+        "submitted_utc": "2026-08-19T15:08:08.597995+00:00",
+        "finished_utc": "2026-08-19T15:09:47.119604+00:00",
+        "shots_submitted": 5000,
+        "shots_returned": 5000,
+        "counts": {
+          "00": 2263,
+          "11": 2063,
+          "01": 408,
+          "10": 266
+        },
+        "probabilities": {
+          "00": 0.4525253,
+          "11": 0.41263927,
+          "01": 0.08169256,
+          "10": 0.05314287
+        }
+      }
+    },
+    "ghz_state_2": {
+      "circuit.qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[3];\ncreg c[3];\nh q[0];\ncx q[0],q[1];\ncx q[1],q[2];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\nmeasure q[2] -> c[2];\n",
+      "result_norm.json": {
+        "experiment": "ghz",
+        "backend": {
+          "sdk": "spinqit",
+          "platform_code": "triangulum_vp",
+          "platform_name": "3Qubit核磁量子计算机"
+        },
+        "circuit": {
+          "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[3];\ncreg c[3];\nh q[0];\ncx q[0],q[1];\ncx q[1],q[2];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\nmeasure q[2] -> c[2];\n",
+          "qubits": 3,
+          "gates": [
+            "h",
+            "cx",
+            "cx"
+          ]
+        },
+        "shots": 5000,
+        "counts": {
+          "000": 1625,
+          "011": 59,
+          "110": 569,
+          "001": 398,
+          "100": 69,
+          "111": 1351,
+          "101": 442,
+          "010": 488
+        },
+        "probabilities": {
+          "000": 0.32505293,
+          "011": 0.01184333,
+          "110": 0.11386858,
+          "001": 0.07952323,
+          "100": 0.01376795,
+          "111": 0.27011559,
+          "101": 0.08832747,
+          "010": 0.09750093
+        },
+        "metrics": {
+          "n_total": 5001,
+          "ghz_ratio_000_111": 0.595081,
+          "n_000": 1625,
+          "n_111": 1351
+        },
+        "task": {
+          "code": "S-260819-0003",
+          "name": null
+        },
+        "timestamps": {
+          "submitted_utc": "2026-08-19T15:48:35.235514+00:00",
+          "finished_utc": "2026-08-19T15:51:09.554195+00:00"
+        }
+      },
+      "result_raw.json": {
+        "task_code": "S-260819-0003",
+        "task_name": null,
+        "machine_pcode": "triangulum_vp",
+        "machine_name": "3Qubit核磁量子计算机",
+        "submitted_utc": "2026-08-19T15:48:35.235514+00:00",
+        "finished_utc": "2026-08-19T15:51:09.554195+00:00",
+        "shots_submitted": 5000,
+        "shots_returned": 5000,
+        "counts": {
+          "000": 1625,
+          "011": 59,
+          "110": 569,
+          "001": 398,
+          "100": 69,
+          "111": 1351,
+          "101": 442,
+          "010": 488
+        },
+        "probabilities": {
+          "000": 0.32505293,
+          "011": 0.01184333,
+          "110": 0.11386858,
+          "001": 0.07952323,
+          "100": 0.01376795,
+          "111": 0.27011559,
+          "101": 0.08832747,
+          "010": 0.09750093
+        }
+      },
+      "selfcheck.json": {
+        "overall_pass": true,
+        "checks": [
+          {
+            "item": "产物存在 circuit.qasm",
+            "pass": true,
+            "detail": "存在"
+          },
+          {
+            "item": "产物存在 result_raw.json",
+            "pass": true,
+            "detail": "存在"
+          },
+          {
+            "item": "产物存在 result_norm.json",
+            "pass": true,
+            "detail": "存在"
+          },
+          {
+            "item": "counts 合计 ≈ shots (允许±1硬件偏差)",
+            "pass": true,
+            "detail": "合计 5001 vs shots 5000 (偏差 1)"
+          },
+          {
+            "item": "shots 平台返回 == 提交值",
+            "pass": true,
+            "detail": "5000 vs 5000"
+          },
+          {
+            "item": "GHZ 保真度 (000+111)/N > 50%",
+            "pass": true,
+            "detail": "59.5081%"
+          },
+          {
+            "item": "噪声位串占比 < 50%",
+            "pass": true,
+            "detail": "2025 (40.4919%) 噪声: {'011': 59, '110': 569, '001': 398, '100': 69, '101': 442, '010': 488}"
+          }
+        ]
+      }
+    },
+    "ghz_triangulum_vp_shots5000": {
+      "circuit.qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[3];\ncreg c[3];\nh q[0];\ncx q[0],q[1];\ncx q[1],q[2];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\nmeasure q[2] -> c[2];\n",
+      "result_norm.json": {
+        "experiment": "ghz",
+        "backend": {
+          "sdk": "spinqit",
+          "platform_code": "triangulum_vp",
+          "platform_name": "3Qubit核磁量子计算机"
+        },
+        "circuit": {
+          "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[3];\ncreg c[3];\nh q[0];\ncx q[0],q[1];\ncx q[1],q[2];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\nmeasure q[2] -> c[2];\n",
+          "qubits": 3,
+          "gates": [
+            "h",
+            "cx",
+            "cx"
+          ]
+        },
+        "shots": 5000,
+        "counts": {
+          "000": 1743,
+          "011": 104,
+          "110": 137,
+          "001": 317,
+          "100": 287,
+          "111": 1551,
+          "101": 462,
+          "010": 400
+        },
+        "probabilities": {
+          "000": 0.34853138,
+          "011": 0.02077645,
+          "110": 0.02735651,
+          "001": 0.06342133,
+          "100": 0.05737762,
+          "111": 0.31015551,
+          "101": 0.09247766,
+          "010": 0.07990354
+        },
+        "metrics": {
+          "n_total": 5001,
+          "ghz_ratio_000_111": 0.658668,
+          "n_000": 1743,
+          "n_111": 1551
+        },
+        "task": {
+          "code": "S-260819-0002",
+          "name": null
+        },
+        "timestamps": {
+          "submitted_utc": "2026-08-19T15:17:54.608148+00:00",
+          "finished_utc": "2026-08-19T15:20:23.878583+00:00"
+        }
+      },
+      "result_raw.json": {
+        "task_code": "S-260819-0002",
+        "task_name": null,
+        "machine_pcode": "triangulum_vp",
+        "machine_name": "3Qubit核磁量子计算机",
+        "submitted_utc": "2026-08-19T15:17:54.608148+00:00",
+        "finished_utc": "2026-08-19T15:20:23.878583+00:00",
+        "shots_submitted": 5000,
+        "shots_returned": 5000,
+        "counts": {
+          "000": 1743,
+          "011": 104,
+          "110": 137,
+          "001": 317,
+          "100": 287,
+          "111": 1551,
+          "101": 462,
+          "010": 400
+        },
+        "probabilities": {
+          "000": 0.34853138,
+          "011": 0.02077645,
+          "110": 0.02735651,
+          "001": 0.06342133,
+          "100": 0.05737762,
+          "111": 0.31015551,
+          "101": 0.09247766,
+          "010": 0.07990354
+        }
+      },
+      "selfcheck.json": {
+        "overall_pass": true,
+        "checks": [
+          {
+            "item": "产物存在 circuit.qasm",
+            "pass": true,
+            "detail": "存在"
+          },
+          {
+            "item": "产物存在 result_raw.json",
+            "pass": true,
+            "detail": "存在"
+          },
+          {
+            "item": "产物存在 result_norm.json",
+            "pass": true,
+            "detail": "存在"
+          },
+          {
+            "item": "counts 合计 ≈ shots (允许±1硬件偏差)",
+            "pass": true,
+            "detail": "合计 5001 vs shots 5000 (偏差 1)"
+          },
+          {
+            "item": "shots 平台返回 == 提交值",
+            "pass": true,
+            "detail": "5000 vs 5000"
+          },
+          {
+            "item": "GHZ 保真度 (000+111)/N > 50%",
+            "pass": true,
+            "detail": "65.8668%"
+          },
+          {
+            "item": "噪声位串占比 < 50%",
+            "pass": true,
+            "detail": "1707 (34.1332%) 噪声: {'011': 104, '110': 137, '001': 317, '100': 287, '101': 462, '010': 400}"
+          }
+        ]
+      }
+    }
+  },
+  "fidelity": {
+    "bell_web_1024": 0.956,
+    "bell_sdk_5000": 0.8652,
+    "ghz_web_1024": 0.8982,
+    "ghz_sdk_5000_run1": 0.658668,
+    "ghz_sdk_5000_run2": 0.595081,
+    "ghz_sdk_5000_pooled": 0.626875
+  },
+  "z_tests": {
+    "bell_web1024_vs_sdk5000": {
+      "p1": 0.9559999,
+      "n1": 1024,
+      "p2": 0.8652,
+      "n2": 5000,
+      "z": 8.164715314259697
+    },
+    "ghz_web1024_vs_sdk5000": {
+      "p1": 0.8982,
+      "n1": 1024,
+      "p2": 0.6586682663467307,
+      "n2": 5000,
+      "z": 15.229732455579702
+    },
+    "ghz_web1024_vs_sdk_pooled2": {
+      "p1": 0.8982,
+      "n1": 1024,
+      "p2": 0.626874625074985,
+      "n2": 10002,
+      "z": 17.361316058247983
+    },
+    "ghz_sdk1_vs_sdk2": {
+      "p1": 0.6586682663467307,
+      "n1": 5001,
+      "p2": 0.5950809838032394,
+      "n2": 5001,
+      "z": 6.574548858102725
+    }
+  }
+}

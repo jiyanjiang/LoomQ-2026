@@ -1,0 +1,366 @@
+{
+  "ctrl_h": {
+    "note": "对照:h",
+    "reference": {
+      "0": 0.5,
+      "1": 0.5
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "0": 0.5,
+        "1": 0.5
+      }
+    },
+    "originq": {
+      "fidelity": 0.9979,
+      "counts": {
+        "0": 0.50299072265625,
+        "1": 0.49700927734375
+      }
+    },
+    "braket": {
+      "fidelity": 0.9975,
+      "counts": {
+        "0": 0.50347900390625,
+        "1": 0.49652099609375
+      }
+    }
+  },
+  "ctrl_x": {
+    "note": "对照:x",
+    "reference": {
+      "1": 1.0
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "1": 1.0
+      }
+    },
+    "originq": {
+      "fidelity": 1.0,
+      "counts": {
+        "1": 1.0
+      }
+    },
+    "braket": {
+      "fidelity": 1.0,
+      "counts": {
+        "1": 1.0
+      }
+    }
+  },
+  "ctrl_rz": {
+    "note": "对照:h rz(pi/2) h",
+    "reference": {
+      "0": 0.5,
+      "1": 0.5
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "0": 0.5,
+        "1": 0.5
+      }
+    },
+    "originq": {
+      "fidelity": 0.9976,
+      "counts": {
+        "1": 0.50341796875,
+        "0": 0.49658203125
+      }
+    },
+    "braket": {
+      "fidelity": 0.998,
+      "counts": {
+        "0": 0.50286865234375,
+        "1": 0.49713134765625
+      }
+    }
+  },
+  "ctrl_cx": {
+    "note": "对照:bell",
+    "reference": {
+      "00": 0.5,
+      "11": 0.5
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "00": 0.5,
+        "11": 0.5
+      }
+    },
+    "originq": {
+      "fidelity": 0.9983,
+      "counts": {
+        "00": 0.50238037109375,
+        "11": 0.49761962890625
+      }
+    },
+    "braket": {
+      "fidelity": 0.9943,
+      "counts": {
+        "00": 0.508056640625,
+        "11": 0.491943359375
+      }
+    }
+  },
+  "P1_h_s_h": {
+    "note": "P1:s 有效则50/50,恒等则100/0",
+    "reference": {
+      "0": 0.5,
+      "1": 0.5
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "0": 0.5,
+        "1": 0.5
+      }
+    },
+    "originq": {
+      "fidelity": 0.9966,
+      "counts": {
+        "0": 0.50482177734375,
+        "1": 0.49517822265625
+      }
+    },
+    "braket": {
+      "fidelity": 0.4588,
+      "counts": {
+        "0": 1.0
+      }
+    }
+  },
+  "P2_h_s_s_h": {
+    "note": "P2:s²=Z→|1⟩100%,恒等→|0⟩100%",
+    "reference": {
+      "1": 1.0
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "1": 1.0
+      }
+    },
+    "originq": {
+      "fidelity": 1.0,
+      "counts": {
+        "1": 1.0
+      }
+    },
+    "braket": {
+      "fidelity": 0.0,
+      "counts": {
+        "0": 1.0
+      }
+    }
+  },
+  "P3_h_s4_h": {
+    "note": "P3:s⁴=I→|0⟩(若s²=Z)",
+    "reference": {
+      "0": 1.0
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "0": 1.0
+      }
+    },
+    "originq": {
+      "fidelity": 1.0,
+      "counts": {
+        "0": 1.0
+      }
+    },
+    "braket": {
+      "fidelity": 1.0,
+      "counts": {
+        "0": 1.0
+      }
+    }
+  },
+  "P4_x_h_s_h": {
+    "note": "P4:换输入态|1⟩",
+    "reference": {
+      "0": 0.5,
+      "1": 0.5
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "0": 0.5,
+        "1": 0.5
+      }
+    },
+    "originq": {
+      "fidelity": 1.0,
+      "counts": {
+        "0": 0.5,
+        "1": 0.5
+      }
+    },
+    "braket": {
+      "fidelity": 0.4588,
+      "counts": {
+        "1": 1.0
+      }
+    }
+  },
+  "P5_h_s_h_x": {
+    "note": "P5:h s h 后再 x",
+    "reference": {
+      "0": 0.5,
+      "1": 0.5
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "0": 0.5,
+        "1": 0.5
+      }
+    },
+    "originq": {
+      "fidelity": 0.9966,
+      "counts": {
+        "1": 0.5047607421875,
+        "0": 0.4952392578125
+      }
+    },
+    "braket": {
+      "fidelity": 0.4588,
+      "counts": {
+        "1": 1.0
+      }
+    }
+  },
+  "P6_h_rz_h": {
+    "note": "P6:rz 对照(应OK)",
+    "reference": {
+      "0": 0.5,
+      "1": 0.5
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "0": 0.5,
+        "1": 0.5
+      }
+    },
+    "originq": {
+      "fidelity": 0.9968,
+      "counts": {
+        "0": 0.50457763671875,
+        "1": 0.49542236328125
+      }
+    },
+    "braket": {
+      "fidelity": 0.9952,
+      "counts": {
+        "1": 0.50677490234375,
+        "0": 0.49322509765625
+      }
+    }
+  },
+  "P7_h_u1_h": {
+    "note": "P7:u1 是否可用",
+    "reference": {
+      "0": 0.5,
+      "1": 0.5
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "0": 0.5,
+        "1": 0.5
+      }
+    },
+    "originq": {
+      "fidelity": 0.9979,
+      "counts": {
+        "0": 0.50299072265625,
+        "1": 0.49700927734375
+      }
+    },
+    "braket": {
+      "error": "Gate u1 is not defined."
+    }
+  },
+  "P8_h_sdg_sdg_h": {
+    "note": "P8:sdg²=Z?",
+    "reference": {
+      "1": 1.0
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "1": 1.0
+      }
+    },
+    "originq": {
+      "fidelity": 1.0,
+      "counts": {
+        "1": 1.0
+      }
+    },
+    "braket": {
+      "fidelity": 0.0,
+      "counts": {
+        "0": 1.0
+      }
+    }
+  },
+  "P9_h_t4_h": {
+    "note": "P9:t⁴=Z→|1⟩,恒等→|0⟩",
+    "reference": {
+      "1": 1.0
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "1": 1.0
+      }
+    },
+    "originq": {
+      "fidelity": 1.0,
+      "counts": {
+        "1": 1.0
+      }
+    },
+    "braket": {
+      "fidelity": 0.0,
+      "counts": {
+        "0": 1.0
+      }
+    }
+  },
+  "P10_h_t_t_h": {
+    "note": "P10:t²=S→50/50,恒等→100/0",
+    "reference": {
+      "0": 0.5,
+      "1": 0.5
+    },
+    "spinq": {
+      "fidelity": 1.0,
+      "counts": {
+        "0": 0.5,
+        "1": 0.5
+      }
+    },
+    "originq": {
+      "fidelity": 0.9986,
+      "counts": {
+        "1": 0.501953125,
+        "0": 0.498046875
+      }
+    },
+    "braket": {
+      "fidelity": 0.4588,
+      "counts": {
+        "0": 1.0
+      }
+    }
+  }
+}

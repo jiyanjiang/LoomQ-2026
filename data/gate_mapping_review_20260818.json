@@ -1,0 +1,332 @@
+{
+  "matrix": {
+    "h": {
+      "spinq": {
+        "verdict": "native",
+        "target_gate": "h",
+        "note": "实测同名支持。"
+      },
+      "braket": {
+        "verdict": "native",
+        "target_gate": "h",
+        "note": "braket_gates.inc 同名支持。"
+      },
+      "originq_transpile": {
+        "verdict": "native",
+        "target_gate": "H",
+        "note": "OriginIR 允许 H，实测 OK。"
+      },
+      "originq_run": {
+        "verdict": "native",
+        "target_gate": "h",
+        "note": "QASM2 路径同名 OK。"
+      }
+    },
+    "x": {
+      "spinq": {
+        "verdict": "native",
+        "target_gate": "x",
+        "note": "实测同名支持。"
+      },
+      "braket": {
+        "verdict": "native",
+        "target_gate": "x",
+        "note": "braket_gates.inc 同名支持。"
+      },
+      "originq_transpile": {
+        "verdict": "native",
+        "target_gate": "X",
+        "note": "OriginIR 允许 X，实测 OK。"
+      },
+      "originq_run": {
+        "verdict": "native",
+        "target_gate": "x",
+        "note": "QASM2 路径同名 OK。"
+      }
+    },
+    "s": {
+      "spinq": {
+        "verdict": "native",
+        "target_gate": "s",
+        "note": "实测同名支持。"
+      },
+      "braket": {
+        "verdict": "native",
+        "target_gate": "s",
+        "note": "braket_gates.inc 同名支持。"
+      },
+      "originq_transpile": {
+        "verdict": "native",
+        "target_gate": "S",
+        "note": "OriginIR 允许 S，实测 OK。"
+      },
+      "originq_run": {
+        "verdict": "native",
+        "target_gate": "s",
+        "note": "QASM2 路径同名 OK。"
+      }
+    },
+    "sdg": {
+      "spinq": {
+        "verdict": "native",
+        "target_gate": "sdg",
+        "note": "实测同名支持。"
+      },
+      "braket": {
+        "verdict": "rename",
+        "target_gate": "si",
+        "note": "sdg 报未定义，须改为 si。"
+      },
+      "originq_transpile": {
+        "verdict": "error",
+        "target_gate": "SDAG",
+        "note": "契约允许 SDAG，但 pyqpanda 3.8.5 报 UserDefinedGate undefined；本地无法解析，需改用 U1 或分解。"
+      },
+      "originq_run": {
+        "verdict": "native",
+        "target_gate": "sdg",
+        "note": "QASM2 路径同名 OK。"
+      }
+    },
+    "t": {
+      "spinq": {
+        "verdict": "native",
+        "target_gate": "t",
+        "note": "实测同名支持。"
+      },
+      "braket": {
+        "verdict": "native",
+        "target_gate": "t",
+        "note": "braket_gates.inc 同名支持。"
+      },
+      "originq_transpile": {
+        "verdict": "native",
+        "target_gate": "T",
+        "note": "OriginIR 允许 T，实测 OK。"
+      },
+      "originq_run": {
+        "verdict": "native",
+        "target_gate": "t",
+        "note": "QASM2 路径同名 OK。"
+      }
+    },
+    "tdg": {
+      "spinq": {
+        "verdict": "native",
+        "target_gate": "tdg",
+        "note": "实测同名支持。"
+      },
+      "braket": {
+        "verdict": "rename",
+        "target_gate": "ti",
+        "note": "tdg 报未定义，须改为 ti。"
+      },
+      "originq_transpile": {
+        "verdict": "error",
+        "target_gate": "TDAG",
+        "note": "契约允许 TDAG，但 pyqpanda 3.8.5 报 UserDefinedGate undefined；本地无法解析，需改用 U1 或分解。"
+      },
+      "originq_run": {
+        "verdict": "native",
+        "target_gate": "tdg",
+        "note": "QASM2 路径同名 OK。"
+      }
+    },
+    "rz(θ)": {
+      "spinq": {
+        "verdict": "native",
+        "target_gate": "rz(θ)",
+        "note": "实测同名支持。"
+      },
+      "braket": {
+        "verdict": "native",
+        "target_gate": "rz(θ)",
+        "note": "braket_gates.inc 原生支持 rz(θ)。"
+      },
+      "originq_transpile": {
+        "verdict": "fmt_only",
+        "target_gate": "RZ q[0],(θ)",
+        "note": "第一格式 RZ(θ) 语法错误，必须第二格式 RZ q[0],(θ)。"
+      },
+      "originq_run": {
+        "verdict": "native",
+        "target_gate": "rz(θ)",
+        "note": "QASM2 路径同名 OK。"
+      }
+    },
+    "ry(θ)": {
+      "spinq": {
+        "verdict": "native",
+        "target_gate": "ry(θ)",
+        "note": "实测同名支持。"
+      },
+      "braket": {
+        "verdict": "native",
+        "target_gate": "ry(θ)",
+        "note": "braket_gates.inc 原生支持 ry(θ)。"
+      },
+      "originq_transpile": {
+        "verdict": "fmt_only",
+        "target_gate": "RY q[0],(θ)",
+        "note": "第一格式 RY(θ) 语法错误，必须第二格式 RY q[0],(θ)。"
+      },
+      "originq_run": {
+        "verdict": "native",
+        "target_gate": "ry(θ)",
+        "note": "QASM2 路径同名 OK。"
+      }
+    },
+    "cx": {
+      "spinq": {
+        "verdict": "native",
+        "target_gate": "cx",
+        "note": "实测同名支持。"
+      },
+      "braket": {
+        "verdict": "rename",
+        "target_gate": "cnot",
+        "note": "cx 报 Gate cx is not defined，须改为 cnot。"
+      },
+      "originq_transpile": {
+        "verdict": "native",
+        "target_gate": "CNOT",
+        "note": "OriginIR 允许 CNOT，实测 OK。"
+      },
+      "originq_run": {
+        "verdict": "native",
+        "target_gate": "cx",
+        "note": "QASM2 路径同名 OK。"
+      }
+    },
+    "cu1(θ)": {
+      "spinq": {
+        "verdict": "native",
+        "target_gate": "cu1(θ)",
+        "note": "实测同名支持；注意相位约定需与 QASM2 一致。"
+      },
+      "braket": {
+        "verdict": "rename",
+        "target_gate": "cphaseshift(θ)",
+        "note": "无 cu1，须改为 cphaseshift(θ)。"
+      },
+      "originq_transpile": {
+        "verdict": "error",
+        "target_gate": "U1 q[0],(θ)",
+        "note": "契约允许 CU1/CR，但 CU1(0.4) 第一格式失败；U1 q[0],(0.4) 可解析，但 U1 是单比特门，不等价于受控 cu1，不能直接替换。"
+      },
+      "originq_run": {
+        "verdict": "native",
+        "target_gate": "cu1(θ)",
+        "note": "QASM2 路径同名 OK。"
+      }
+    },
+    "swap": {
+      "spinq": {
+        "verdict": "native",
+        "target_gate": "swap",
+        "note": "实测同名支持。"
+      },
+      "braket": {
+        "verdict": "native",
+        "target_gate": "swap",
+        "note": "braket_gates.inc 同名支持。"
+      },
+      "originq_transpile": {
+        "verdict": "native",
+        "target_gate": "SWAP",
+        "note": "OriginIR 允许 SWAP，实测 OK。"
+      },
+      "originq_run": {
+        "verdict": "native",
+        "target_gate": "swap",
+        "note": "QASM2 路径同名 OK。"
+      }
+    },
+    "ccx": {
+      "spinq": {
+        "verdict": "native",
+        "target_gate": "ccx",
+        "note": "实测同名支持。"
+      },
+      "braket": {
+        "verdict": "rename",
+        "target_gate": "ccnot",
+        "note": "ccx 报未定义，须改为 ccnot。"
+      },
+      "originq_transpile": {
+        "verdict": "native",
+        "target_gate": "TOFFOLI",
+        "note": "OriginIR 允许 TOFFOLI/CCX，实测 TOFFOLI OK。"
+      },
+      "originq_run": {
+        "verdict": "native",
+        "target_gate": "ccx",
+        "note": "QASM2 路径同名 OK。"
+      }
+    }
+  },
+  "answers": {
+    "q1": "originq 的 transpile 应输出本地可解析的替代门名，而不是契约格式门名 SDAG/TDAG/CU1。理由：契约允许这些门名，但本地 pyqpanda 3.8.5 实测不认 SDAG/TDAG，CU1 第一格式也失败；若 transpile 输出契约门名，run() 的 OriginIR 解析路径会直接报错。对评测器解析的影响：评测器若严格按契约解析，可能期望 SDAG/TDAG/CU1；但本地可执行路径要求替代门名或分解。因此需要适配层明确：transpile 输出本地可解析形式，评测器解析格式与本地 SDK 接受能力不一致时必须以后者为准，或由适配层在评测器侧做门名归一化。",
+    "q2": "braket 的 cu1(θ)→cphaseshift(θ) 相位语义与 QASM2 的 cu1(θ) 完全一致：都是对角受控相位门 diag(1,1,1,e^{iθ})，无额外全局相位差异。cphaseshift 不引入全局相位差异，因此不影响测量分布。",
+    "q3": "是。originq 参数门第二格式 \"RZ q[0],(0.5)\" 就是契约文档允许的 \"RY q[k],(θ)\" 写法。transpile 输出它，评测器按契约能够解析，因为契约明确允许参数门第二格式。",
+    "q4": "spinq 实测显示 12 门全部同名零映射，基本可信。隐藏坑主要是 cu1 相位约定：需确认 spinq 的 cu1(θ) 与 QASM2 的 cu1(θ) 相位约定一致；若内部实现有全局相位或符号差异，虽然不影响测量分布，但会影响态矢量相位比较。其余门未发现隐藏坑。",
+    "q5": "与 gate_identities.md 恒等式冲突的点：originq_transpile 的 CU1 若被误替换为 U1 会破坏受控语义，因为 U1 是单比特门，不能等价于 cu1；sdg/tdg 在 originq_transpile 中若按恒等式分解为 U1 也需注意全局相位；braket 的 cphaseshift 与 cu1 恒等式一致，无冲突；spinq 的 cu1 需确认相位约定是否与恒等式一致。",
+    "q6": "最终采纳的 transpile 门名映射规则（12 门 × 3 后端）：spinq：h→h, x→x, s→s, sdg→sdg, t→t, tdg→tdg, rz(θ)→rz(θ), ry(θ)→ry(θ), cx→cx, cu1(θ)→cu1(θ), swap→swap, ccx→ccx。braket：h→h, x→x, s→s, sdg→si, t→t, tdg→ti, rz(θ)→rz(θ), ry(θ)→ry(θ), cx→cnot, cu1(θ)→cphaseshift(θ), swap→swap, ccx→ccnot。originq_transpile：h→H, x→X, s→S, sdg→U1 q[0],(-π/2) 或分解, t→T, tdg→U1 q[0],(-π/4) 或分解, rz(θ)→RZ q[0],(θ), ry(θ)→RY q[0],(θ), cx→CNOT, cu1(θ)→按恒等式分解为 U1+CX 序列, swap→SWAP, ccx→TOFFOLI。"
+  },
+  "summary": {
+    "confirmed": [
+      "h:spinq",
+      "h:braket",
+      "h:originq_transpile",
+      "h:originq_run",
+      "x:spinq",
+      "x:braket",
+      "x:originq_transpile",
+      "x:originq_run",
+      "s:spinq",
+      "s:braket",
+      "s:originq_transpile",
+      "s:originq_run",
+      "t:spinq",
+      "t:braket",
+      "t:originq_transpile",
+      "t:originq_run",
+      "rz(θ):spinq",
+      "rz(θ):braket",
+      "rz(θ):originq_run",
+      "ry(θ):spinq",
+      "ry(θ):braket",
+      "ry(θ):originq_run",
+      "cx:spinq",
+      "cx:originq_transpile",
+      "cx:originq_run",
+      "cu1(θ):spinq",
+      "cu1(θ):originq_run",
+      "swap:spinq",
+      "swap:braket",
+      "swap:originq_transpile",
+      "swap:originq_run",
+      "ccx:spinq",
+      "ccx:originq_transpile",
+      "ccx:originq_run"
+    ],
+    "corrected": [
+      "sdg:braket 原判定 native 有误，应为 rename 到 si",
+      "tdg:braket 原判定 native 有误，应为 rename 到 ti",
+      "cx:braket 原判定 native 有误，应为 rename 到 cnot",
+      "cu1(θ):braket 原判定 native 有误，应为 rename 到 cphaseshift(θ)",
+      "ccx:braket 原判定 native 有误，应为 rename 到 ccnot",
+      "sdg:originq_transpile 原判定 native 有误，应为 error（本地不认 SDAG）",
+      "tdg:originq_transpile 原判定 native 有误，应为 error（本地不认 TDAG）",
+      "rz(θ):originq_transpile 原判定 native 有误，应为 fmt_only（第二参数格式）",
+      "ry(θ):originq_transpile 原判定 native 有误，应为 fmt_only（第二参数格式）",
+      "cu1(θ):originq_transpile 原判定 native 有误，应为 error（CU1 第一格式失败，U1 不等价）"
+    ],
+    "adapter_changes": [
+      "braket adapter：sdg→si，tdg→ti，cx→cnot，cu1→cphaseshift，ccx→ccnot；include 改为 braket_gates.inc 绝对路径。",
+      "originq_transpile adapter：参数门 RZ/RY 必须输出第二格式 RZ q[0],(θ)；sdg/tdg 不能输出 SDAG/TDAG，需输出 U1 或分解；cu1 不能输出 CU1，需按恒等式分解为 U1+CX 序列。",
+      "评测器解析层：需兼容 originq 本地替代门名与契约门名不一致的情况，或统一归一化门名。",
+      "spinq adapter：确认 cu1 相位约定与 QASM2 一致，必要时加相位补偿。"
+    ]
+  }
+}

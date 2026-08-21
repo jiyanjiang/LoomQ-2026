@@ -1,0 +1,45 @@
+{
+  "experiment": "bellstate",
+  "backend": {
+    "sdk": "spinqit",
+    "platform_code": "gemini_vp",
+    "platform_name": "2Qubit核磁量子计算机"
+  },
+  "circuit": {
+    "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[2];\ncreg c[2];\nh q[0];\ncx q[0],q[1];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\n",
+    "qubits": 2,
+    "gates": [
+      "h",
+      "cx"
+    ]
+  },
+  "shots": 8192,
+  "counts": {
+    "00": 3713,
+    "11": 4073,
+    "01": 78,
+    "10": 329
+  },
+  "probabilities": {
+    "00": 0.45320558,
+    "11": 0.4971752,
+    "01": 0.00951432,
+    "10": 0.04010491
+  },
+  "metrics": {
+    "n_total": 8193,
+    "bell_ratio_00_11": 0.950323,
+    "n_00": 3713,
+    "n_11": 4073,
+    "noise_01": 78,
+    "noise_10": 329
+  },
+  "task": {
+    "code": "G-260820-0005",
+    "name": null
+  },
+  "timestamps": {
+    "submitted_utc": "2026-08-20T04:13:35.233969+00:00",
+    "finished_utc": "2026-08-20T04:15:13.837002+00:00"
+  }
+}

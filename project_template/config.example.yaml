@@ -1,0 +1,50 @@
+# ============================================================
+# 新项目配置文件（示例/空模板）— 对外分享的就是这个文件
+#
+# 使用方法：
+#   1. 复制本文件为 config.yaml（cp config.example.yaml config.yaml）
+#   2. 在本机 config.yaml 中填写：绝对路径、各服务 API key
+#   3. config.yaml 已在 .gitignore 中排除，绝不分享
+# ============================================================
+
+# ---------- Python 环境 ----------
+# 共享 venv 的绝对路径（多项目共用；分享版留空）
+venv_path: ""
+# 主力 Python 版本
+python_version: "3.12"
+
+# ---------- 数据路径（全部相对仓库根）----------
+# 可分享数据（public/ 区）
+public_data_dir: public/data
+# 私有数据（private/ 区；本机可填绝对路径，分享版留空由默认值兜底）
+private_data_dir: private/data
+
+# ---------- 实验报告目录 ----------
+experiments_dir: public/docs/experiments
+
+# ---------- 写作模板 ----------
+style_dir: public/style
+default_style: QJ_5.md
+
+# ---------- API keys（分享版全空，绝不填真值）----------
+# 生成调研报告 / 科普文章（deepseek-v4-pro）
+deepseek_api_key: ""
+deepseek_base_url: ""
+deepseek_model: deepseek-v4-pro
+
+# 做图（豆包 seedance 2.0，经 ARK 平台）
+ark_api_key: ""
+ark_endpoint: ""
+
+# 本源量子云（悟空180 真机提交）
+originq_api_token: ""
+
+# Web 用户态 LLM（web/app.py 设置面板读写，替代旧 config/user_key.json）
+llm_user_api_key: ""
+llm_user_base_url: ""
+llm_user_model: deepseek-v4-flash
+
+# 其他服务按需追加（openalex / 豆包文本 / ...），一律在此登记，严禁硬编码进脚本
+
+# ---------- Web / 其他 ----------
+web_port: 5010

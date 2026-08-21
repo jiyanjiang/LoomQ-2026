@@ -1,0 +1,43 @@
+{
+  "task_code": "G-260820-0005",
+  "info": {
+    "status": 200,
+    "msg": "",
+    "task": {
+      "tid": 61359,
+      "tcode": "G-260820-0005",
+      "tname": "bellstate_gemini_vp_s8192",
+      "bitNum": 2,
+      "clbitNum": 0,
+      "simulator": false,
+      "calcMatrix": false,
+      "runSimu": false,
+      "tstatus": "S",
+      "shots": 8192,
+      "sourceType": "spinqit",
+      "sourceOriginName": null,
+      "sourceAddr": "files-2026-08/G-260820-0005.qasm",
+      "sourceCode": "OPENQASM 2.0; \ninclude \"qelib1.inc\";\nqreg q[2];\n\nh q[0];\ncx q[0],q[1];",
+      "description": "LoomQ Bell state via SpinQit SDK, shots=8192",
+      "createdTime": "2026-08-20T04:13:37.742+00:00",
+      "startTime": "2026-08-20T04:13:37.762+00:00",
+      "endTime": "2026-08-20T04:15:10.726+00:00",
+      "errorMsg": null,
+      "platformId": 1,
+      "platformName": "2Qubit核磁量子计算机",
+      "platformCode": "gemini_vp",
+      "machineId": 10,
+      "machineCode": "Gemini-pro-1",
+      "userId": "xxxx",
+      "userName": "xxxx",
+      "timecost": 3.0,
+      "curQueueSize": -1,
+      "percentageFinished": null
+    }
+  },
+  "status": {
+    "status": 200,
+    "msg": "",
+    "taskStatus": "S"
+  }
+}

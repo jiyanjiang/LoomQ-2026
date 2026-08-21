@@ -1,7 +1,35 @@
-.DS_Store
-.DStore
-**/ .DS_Store
-**/.DS_Store
-**/.DStore
+# 私有配置（含 API key），绝不提交
+config.yaml
+api-key.txt
+# 脱敏改造前的脚本备份（含历史账号）
+backups_*/
+# config/ 目录默认全忽略，仅放行模板文件
+config/*
+!config/machines.yaml.example
+!config/README.md
+
+# Python
 __pycache__/
-*.py[cod]
+*.pyc
+.venv/
+*.egg-info/
+
+# 测试截图（playwright 中间产物，集中管理不提交）
+docs/test_screenshots/
+
+# 个人信息：SSH 公钥
+spinq.txt.pub
+
+# 版权书（libgen epub + 解包图 + PDF）与第三方课件（项目无关）
+*.epub
+docs/quantum_book/
+PPT_PDF/
+
+# Playwright 测试中间产物（console 日志）
+.playwright-cli/
+
+# 测试用临时文件，不提交
+data/onboarding_imgs/preview.html
+
+# 其他
+.DS_Store

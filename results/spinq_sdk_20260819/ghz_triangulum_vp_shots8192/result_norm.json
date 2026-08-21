@@ -1,0 +1,52 @@
+{
+  "experiment": "ghz",
+  "backend": {
+    "sdk": "spinqit",
+    "platform_code": "triangulum_vp",
+    "platform_name": "3Qubit核磁量子计算机"
+  },
+  "circuit": {
+    "qasm": "OPENQASM 2.0;\ninclude \"qelib1.inc\";\nqreg q[3];\ncreg c[3];\nh q[0];\ncx q[0],q[1];\ncx q[1],q[2];\nmeasure q[0] -> c[0];\nmeasure q[1] -> c[1];\nmeasure q[2] -> c[2];\n",
+    "qubits": 3,
+    "gates": [
+      "h",
+      "cx",
+      "cx"
+    ]
+  },
+  "shots": 8192,
+  "counts": {
+    "000": 3189,
+    "011": 629,
+    "110": 130,
+    "001": 260,
+    "100": 444,
+    "111": 2952,
+    "101": 292,
+    "010": 297
+  },
+  "probabilities": {
+    "000": 0.3892686,
+    "011": 0.07672253,
+    "110": 0.01583202,
+    "001": 0.03177009,
+    "100": 0.05414839,
+    "111": 0.36033583,
+    "101": 0.03561057,
+    "010": 0.03631196
+  },
+  "metrics": {
+    "n_total": 8193,
+    "ghz_ratio_000_111": 0.749542,
+    "n_000": 3189,
+    "n_111": 2952
+  },
+  "task": {
+    "code": "S-260820-0001",
+    "name": null
+  },
+  "timestamps": {
+    "submitted_utc": "2026-08-20T04:15:23.813779+00:00",
+    "finished_utc": "2026-08-20T04:17:57.533606+00:00"
+  }
+}

@@ -1,0 +1,35 @@
+# ============================================================
+# LoomQ 配置文件 · 空白模板（唯一可提交版本，绝不填真值）
+#
+# 使用方法：
+#   1. 复制为 config.yaml（cp config.yaml.example config.yaml）
+#   2. 填写本机私密值（路径 / 各 API key）
+#   3. config.yaml 已被 .gitignore 排除，绝不分享
+#
+# 键集 = 唯一私密文件 config.yaml 的全部程序键（2026-08-20 三合一后）。
+# 程序一律经 public/scripts/key_loader.py 读取。
+# ============================================================
+
+# ---------- Python 环境 ----------
+venv_path: ""
+python_version: "3.10"
+
+# ---------- DeepSeek（门映射审查 / L2 调试 / 调研报告）----------
+deepseek_api_key: ""
+deepseek_base_url: ""
+deepseek_model: deepseek-v4-pro
+
+# ---------- 火山方舟 ARK（豆包 seedance 做图）----------
+ark_api_key: ""
+ark_endpoint: ""
+
+# ---------- 本源量子云（悟空180 真机）----------
+originq_api_token: ""
+
+# ---------- Web 用户态 LLM（web/app.py 设置面板读写）----------
+llm_user_api_key: ""
+llm_user_base_url: ""
+llm_user_model: deepseek-v4-flash
+
+# ---------- Web / 其他 ----------
+web_port: 5010

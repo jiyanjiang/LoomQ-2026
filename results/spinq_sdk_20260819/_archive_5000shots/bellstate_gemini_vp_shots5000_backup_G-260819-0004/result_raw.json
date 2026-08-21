@@ -1,0 +1,23 @@
+{
+  "task_code": "G-260819-0004",
+  "task_name": null,
+  "platform": null,
+  "machine_pcode": "gemini_vp",
+  "machine_name": "2Qubit核磁量子计算机",
+  "submitted_utc": "2026-08-19T15:08:08.597995+00:00",
+  "finished_utc": "2026-08-19T15:09:47.119604+00:00",
+  "shots_submitted": 5000,
+  "shots_returned": 5000,
+  "counts": {
+    "00": 2263,
+    "11": 2063,
+    "01": 408,
+    "10": 266
+  },
+  "probabilities": {
+    "00": 0.4525253,
+    "11": 0.41263927,
+    "01": 0.08169256,
+    "10": 0.05314287
+  }
+}

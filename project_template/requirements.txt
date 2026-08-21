@@ -1,0 +1,7 @@
+# 共通依赖（多项目共用 venv 实测可用；按新项目需要追加）
+duckdb>=1.0.0
+numpy>=1.24.0
+pandas>=2.0.0
+flask>=3.0.0
+matplotlib>=3.7.0
+requests>=2.31.0
