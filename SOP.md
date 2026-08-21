@@ -152,3 +152,71 @@ python evaluator.py --level l1 --target spinq,originq,braket --json-out report.j
 - originq 的 `run()` 走 QASM 2.0 路径（`convert_qasm_string_to_qprog`），12 门实测全 OK，**零映射**。
 - 坑：pyqpanda 3.8.5 的 OriginIR 解析器不认 `SDAG/TDAG`（契约允许但 SDK bug）、不认 `RZ(θ)` 第一格式；braket 本地无 `stdgates.inc`，须用 `braket_gates.inc` 绝对路径。
 - adapter 现状：braket 仅做了 cx→cnot，originq 仅做了 cx→CNOT；**其余门名映射待补（第 1 步进行中）**。
+
+---
+
+## §5 提交与发布流程（2026-08-21 首次参赛提交后固化）
+
+**仓库**：fork 自官方 `QAIDAO/LoomQ-2026`，推送到 `git@github.com:jiyanjiang/LoomQ-2026.git`（提交即参赛，官方 `.github/workflows/submission-intake.yml` 收件）。
+
+**历史结构**（方案 A 融合后，勿再改）：
+- `1071f71`（官方基线，52 文件）+ `4fe20a0`（参赛实现，227 文件，2026-08-21 已推）
+- 本地备份 tag：`backup-local-start-0abc19a` / `backup-local-final-2b5a957`（仅回滚用，永不删除）
+
+### 5.1 发布前自检（每次 push 前必跑）
+
+```bash
+source ~/.venvs/loomq310/bin/activate
+# ① 官方 evaluator 契约（公开 6 项：L1 三平台 bell/ghz3 + L2 public-ghz + L3 public-branch）
+cd starter_kit && python evaluator.py --level all --target spinq,originq,braket && cd ..
+# ② 本地扩展测试套件（21 用例 × 3 后端 = 63 项）
+python tests/run_test_suite.py   # 期望 63/63 PASS
+# ③ 敏感文件复查（必须全被忽略）
+git check-ignore config.yaml api-key.txt spinq.txt.pub config/machines.yaml data/onboarding_imgs/preview.html
+# ④ 官方文件完整性（不得有缺失；空输出=OK）
+git ls-tree -r --name-only origin/main | while read f; do [ -e "$f" ] || echo "缺失: $f"; done
+```
+
+### 5.2 提交步骤（参赛后日常迭代，直接推即可，无需再融合）
+
+```bash
+cd /Users/jiyanjiang/Downloads/LoomQ
+git status -sb                       # 先看改了什么
+git diff --stat                      # 变更概览
+git add -A
+git diff --cached --name-only | grep -iE "api.?key|machines|spinq.txt|\.epub|quantum_book|PPT_PDF|preview\.html"
+# ↑ 有输出=有敏感文件误入，立刻 git reset 排查；空=安全
+git commit -m "feat|fix|docs: 一句话描述"
+git push                             # 已跟踪 origin/main，直接推
+git log --oneline -3                 # 确认提交已落地
+```
+
+**铁律**：
+1. 改代码 → 本地自检（§5.1）→ 提交 → push，每步之间不连跑，先回报再继续。
+2. 提交信息遵循 Conventional Commits（`feat:`/`fix:`/`docs:`/`chore:`）。
+3. 绝不 `push --force`（fork 参赛库禁止改写历史）；如需回滚，用备份 tag 重建新提交，不改写已推送历史。
+4. 截止 2026-08-25 12:00 UTC+8；截止前一切 push 均自动进入收件。
+
+### 5.3 评分对照（2026-08-21 自检口径，满分 100+12）
+
+| 项目 | 分数 | 当前状态 | 预估 |
+|---|---|---|---|
+| L1 语义等价 | 35 | 三平台 12 门对齐，公开+本地 63 项全过 | 30-35 |
+| L1 真机 | 10 | 量旋双平台 + 本源双任务，evidence 已填 | 10 |
+| L2 客观 | 20 | agent_chat 自验闭环，公开 GHZ PASS；隐藏变体未知 | 12-18 |
+| L2 交互 | 10 | Web 工作台 3 任务 4 截图已填（客观≥12 才计入） | 0-10 |
+| L3 混合编译 | 15 | 公开 1/1 + 隐藏矩阵 11/11 | 15 |
+| 工程与产品化 | 10 | README/USAGE/架构/一键启动齐全 | 8-10 |
+| Bonus 新手引导 | 4 | 4 项全填 | 3-4 |
+| Bonus 自定义 RISC-V | 8 | 规格+测试齐，但 riscv_emulator.py 与官方 diff=0（未扩展指令） | 0-8（存疑） |
+| **合计** | **100+12** | | **78-110** |
+
+**重要风险点（2026-08-21 自检发现）**：官方 Bonus +8 要求"对官方模拟器的扩展实现（fork `riscv_emulator.py` 增加指令支持）"，但当前 `starter_kit/riscv_emulator.py` 与官方逐字一致（`git diff 1071f71 HEAD -- starter_kit/riscv_emulator.py` 为 0 行）。若评分严格核对 diff，此项可能不成立。**补救（可选）**：fork 模拟器增加 1-2 条自定义指令（如 `qrx`/`qcnot` 等量子操作 opcode）+ 规格文档 + 端到端测试，再 push 一次。
+
+### 5.4 收尾清单（参赛后可选改进，非必做）
+
+- [ ] 补做自定义 RISC-V 扩展指令（+8 存疑项，见 5.3 风险点）
+- [ ] 官方隐藏电路（GHZ-5/QFT-4/Grover-3/Random×3）本地全覆盖验证（tests 已含等价电路，可再加 3 个 Random 变体）
+- [ ] L2 隐藏 prompt 变体本地自测（模拟正式评测的 12 case 抽样）
+- [ ] web 展示层完善（schwinger.js LEVELS 迁移到 data/ JSON）
+- [ ] 赛后复盘：收集评测反馈，更新 gate_mapping 文档
