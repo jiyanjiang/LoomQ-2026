@@ -1,6 +1,6 @@
 # L3 RISC-V 编码规格（`compile_hybrid` 设计文档）
 
-> 2026-08-20 定稿。范围：LoomQ L3 量子-经典混合编程（8 分 Bonus）的经典侧翻译契约。
+> 2026-08-20 定稿。范围：LoomQ L3 量子-经典混合编程（15 分）的经典侧翻译契约。
 > 权威契约来源：`starter_kit/evaluator.py::evaluate_l3()` + `starter_kit/riscv_emulator.py`。
 
 ---

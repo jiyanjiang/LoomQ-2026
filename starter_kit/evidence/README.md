@@ -110,12 +110,12 @@ evidence/files/W180-21F3E7FB2E0D12E0999E3C35E5473C7C.screenshot.png  任务页�
 以下三项必须齐全且测试通过，才获得 8 分：
 
 ```text
-指令编码规格：docs/l3_riscv_encoding_spec.md（2026-08-20 定稿：7 条 RISC-V 指令集 + 变量映射 + 分支语义翻译契约 + 隐藏变体覆盖矩阵）
-模拟器扩展实现：starter_kit/riscv_emulator.py（TinyRISCVEmulator，32 寄存器 x0-x31、li/add/sub/addi/beq/bne/j 共 7 条指令、标签/注释解析、max_steps 防死循环）；starter_kit/adapter.py::compile_hybrid()（L555，classical{} 块 → RISC-V 汇编迷你翻译器：==/!= 分支、多 if 串联、无 else、寄存器赋值 rN=rM、临时寄存器 x11 起避让）
-端到端测试命令：python3 starter_kit/evaluator.py --level l3（公开契约 1 项 PASS）；隐藏变体矩阵 11/11 全过（==0/==1/!= 比较符、换常量、多 if 串联、无 else、寄存器赋值——见 docs/l3_riscv_encoding_spec.md §5/§7）
+指令编码规格：docs/riscv_quantum_extension_spec.md（2026-08-21 定稿：5 条量子指令 qinit/qh/qcnot/qrx/qmeas 的 RISC-V CUSTOM-0(opcode=0x0B) I-type 编码表 + 4-qubit 态矢量执行语义 + 与官方 7 条经典指令的兼容性声明；机器码示例为实现的实测输出）
+模拟器扩展实现：starter_kit/riscv_emulator.py（fork 官方实现，TinyRISCVEmulator 内新增 5 条量子指令：encode_quantum/decode_quantum 32 位机器码编码、_apply_h/_apply_cnot/_apply_rx 门演化、_measure 投影坍缩并写回经典寄存器、machine_code()/run_machine_code()；官方 7 条经典指令与 load_program/set_register/get_register/execute 接口逐字不变）
+端到端测试：python3 tests/test_riscv_quantum_ext.py（16 项全过：官方回归 / 单门态矢 / Bell+GHZ 纠缠 / 含参门 qrx / 测量坍缩一致性 / Bell 态测量分布 8192 次仅 00/11 / 经典-量子混合程序 / 机器码编码往返 / machine_code 与汇编执行等价 / evaluator --level l3 契约回归）；python3 starter_kit/riscv_emulator.py（经典回归 + Bell 态自测）
 ```
 
-评测口径：编译产物 (quantum_ops, assembly) 中 assembly 在 TinyRISCVEmulator 执行，x10=测量值入口、x1=分支结果出口，8 分要求三项齐全且测试通过——已全部满足。
+评测口径：官方 Bonus +8 要求对 `riscv_emulator.py` 的扩展实现（fork 增加指令支持）+ 规格文档 + 端到端测试。本实现通过自定义量子 opcode（RISC-V CUSTOM-0 空间）为模拟器增加量子指令支持，三件套齐全且全量测试通过；同时 L3（15 分）契约不受影响——`evaluator --level all` 6/6 PASS、L1 套件 21 用例 × 3 后端 63/63 全过。
 
 ## 新手引导与视觉叙事 Bonus
 

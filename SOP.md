@@ -106,14 +106,27 @@ python evaluator.py --level l1 --target spinq,originq,braket --json-out report.j
 
 ---
 
-## §3.7 L3（自定义量子 RISC-V Bonus，2026-08-21 申报）
+## §3.7 L3（量子-经典混合编译，2026-08-21 申报）
 
 - 契约：`compile_hybrid(hybrid_qasm) -> (quantum_ops, assembly)`；`assembly` 在 `TinyRISCVEmulator` 执行，**x10=测量值入口、x1=分支结果出口**。
-- 模拟器：`starter_kit/riscv_emulator.py`（170 行，7 条指令 li/add/sub/addi/beq/bne/j，x0 恒 0，max_steps 防死循环）。
+- 模拟器：`starter_kit/riscv_emulator.py`（7 条经典指令 li/add/sub/addi/beq/bne/j + 量子扩展 5 条 qinit/qh/qcnot/qrx/qmeas，x0 恒 0，max_steps 防死循环，4-qubit 态矢量）。
 - 翻译器：`starter_kit/adapter.py::compile_hybrid`（L555）：`==`→beq、`!=`→bne、多 if 串联 `THEN_n/END_n` 编号递增、无 else 省略 else 段、`rN=rM`→`add xN,xM,x0`、比较常量装载临时寄存器 x11 起避让。
 - 规格：`docs/l3_riscv_encoding_spec.md`（2026-08-20 定稿：指令集/变量映射/分支语义/隐藏变体覆盖矩阵）。
 - 自验：`python evaluator.py --level l3` 公开契约 1/1 PASS；隐藏变体矩阵 11/11 全过（==0/==1/!=、换常量、多 if、无 else、寄存器赋值）。
 - evidence：`starter_kit/evidence/README.md` L3 段三项已填；`submission.yaml` `l3: true`。
+
+---
+
+## §3.8 Bonus +8 量子 RISC-V 扩展（2026-08-21 补做）
+
+- 目标：满足赛题 Bonus +8「fork `riscv_emulator.py` 增加指令支持」三件套（编码规格 + 扩展实现 + 端到端测试）。
+- 编码：RISC-V **CUSTOM-0**（opcode=0x0B）I-type 空间，funct3 区分 5 条量子指令：`qinit`(000)/`qh`(001)/`qcnot`(010)/`qrx`(011)/`qmeas`(100)。
+- 执行模型：4-qubit 态矢量（q0 最低位，little-endian，初始 |0000>）；`qh`/`qcnot`/`qrx` 矩阵演化；`qmeas` Born 采样 + 投影坍缩并写回经典寄存器，可与经典指令交错执行；`load_program` 重载重置态矢。
+- 规格：`docs/riscv_quantum_extension_spec.md`（2026-08-21 定稿：编码布局/指令表/执行语义/兼容性声明/实测机器码示例）。
+- 扩展实现：`starter_kit/riscv_emulator.py` 新增 `encode_quantum`/`decode_quantum`/`machine_code`/`run_machine_code`/`get_statevector`/`set_seed`，量子指令统一经 32 位机器码路径执行（非文本特判）。
+- 端到端测试：`tests/test_riscv_quantum_ext.py` 16 项全过（官方回归/单门态矢/Bell+GHZ/含参门/测量坍缩一致/分布 8192 次仅 00/11/混合程序/编码往返/机器码等价/L3 契约回归）。
+- 自验：`python3 starter_kit/riscv_emulator.py`（经典回归 + Bell 态自测）；`python3 tests/test_riscv_quantum_ext.py` 16/16；`python3 starter_kit/evaluator.py --level all` 6/6（L3 契约未破坏）；L1 套件 21 用例 × 3 后端 63/63。
+- evidence：`starter_kit/evidence/README.md` Bonus 段已重写指向量子扩展三件套。
 
 ---
 
@@ -208,14 +221,14 @@ git log --oneline -3                 # 确认提交已落地
 | L3 混合编译 | 15 | 公开 1/1 + 隐藏矩阵 11/11 | 15 |
 | 工程与产品化 | 10 | README/USAGE/架构/一键启动齐全 | 8-10 |
 | Bonus 新手引导 | 4 | 4 项全填 | 3-4 |
-| Bonus 自定义 RISC-V | 8 | 规格+测试齐，但 riscv_emulator.py 与官方 diff=0（未扩展指令） | 0-8（存疑） |
-| **合计** | **100+12** | | **78-110** |
+| Bonus 自定义 RISC-V | 8 | 量子扩展三件套齐：fork 模拟器 +5 量子指令（CUSTOM-0 编码）+ 规格 + 端到端测试 16 项 | 8 |
+| **合计** | **100+12** | | **86-110** |
 
-**重要风险点（2026-08-21 自检发现）**：官方 Bonus +8 要求"对官方模拟器的扩展实现（fork `riscv_emulator.py` 增加指令支持）"，但当前 `starter_kit/riscv_emulator.py` 与官方逐字一致（`git diff 1071f71 HEAD -- starter_kit/riscv_emulator.py` 为 0 行）。若评分严格核对 diff，此项可能不成立。**补救（可选）**：fork 模拟器增加 1-2 条自定义指令（如 `qrx`/`qcnot` 等量子操作 opcode）+ 规格文档 + 端到端测试，再 push 一次。
+**风险点（2026-08-21 已解除）**：官方 Bonus +8 要求"对官方模拟器的扩展实现（fork `riscv_emulator.py` 增加指令支持）"。已于 2026-08-21 补做：新增 5 条量子指令 `qinit/qh/qcnot/qrx/qmeas`（RISC-V CUSTOM-0 opcode=0x0B 编码），经典 7 条指令与 `load_program/set_register/get_register/execute` 接口逐字不变；规格 `docs/riscv_quantum_extension_spec.md`；端到端测试 `tests/test_riscv_quantum_ext.py` 16/16 PASS；`evaluator --level all` 6/6、L1 套件 63/63 回归通过。详见 §3.8。
 
 ### 5.4 收尾清单（参赛后可选改进，非必做）
 
-- [ ] 补做自定义 RISC-V 扩展指令（+8 存疑项，见 5.3 风险点）
+- [x] 补做自定义 RISC-V 扩展指令（+8，2026-08-21 完成，见 §3.8/§5.3）
 - [ ] 官方隐藏电路（GHZ-5/QFT-4/Grover-3/Random×3）本地全覆盖验证（tests 已含等价电路，可再加 3 个 Random 变体）
 - [ ] L2 隐藏 prompt 变体本地自测（模拟正式评测的 12 case 抽样）
 - [ ] web 展示层完善（schwinger.js LEVELS 迁移到 data/ JSON）

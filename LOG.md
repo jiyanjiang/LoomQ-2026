@@ -105,6 +105,9 @@
 
 - | 文档同步（收口） | 进度小结入档：SOP v1.2→v1.3（版本行同步；§3.7 L3 已在当日文档同步新增）、PRD v2.1→v2.3（版本行同步 + §二/§三 Composer 条目补「双向同步/LLM 自动搭建/紧凑布局 v2」+ 版本记录补 v2.3 行）、PRD_SELFCHECK v1.1→v1.2（版本行同步 + Composer 自检行补三连改）；三文档版本行与实际内容全部对齐 | SOP.md + docs/PRD.md + docs/PRD_SELFCHECK.md
 
+- | Bonus +8 量子 RISC-V 扩展补做完成 | fork riscv_emulator.py 新增 5 条量子指令（qinit/qh/qcnot/qrx/qmeas），RISC-V CUSTOM-0(opcode=0x0B) I-type 编码，4-qubit 态矢量 + 测量投影坍缩写回经典寄存器，经典 7 条指令与 load_program/set_register/get_register/execute 接口逐字不变；量子指令统一经 32 位机器码路径执行（encode_quantum→decode_quantum→_exec_quantum_word）；规格 docs/riscv_quantum_extension_spec.md（编码表机器码为实测校准）；端到端测试 tests/test_riscv_quantum_ext.py 16/16 PASS（官方回归/单门态矢/Bell+GHZ/含参门/测量坍缩一致/分布 8192 次仅 00/11/混合程序/编码往返/机器码等价/L3 契约回归）；evaluator --level all 6/6 + L1 套件 21 用例×3 后端 63/63 回归通过 | starter_kit/riscv_emulator.py + docs/riscv_quantum_extension_spec.md + tests/test_riscv_quantum_ext.py
+- | 文档口径修正 + evidence 重写 | docs/l3_riscv_encoding_spec.md 首行"8 分 Bonus"→"15 分 L3"；SOP §3.7 标题去"Bonus"+新增 §3.8 量子扩展节；§5.3 Bonus 行 0-8(存疑)→8、风险点标记已解除；§5.4 清单勾选；evidence/README.md Bonus 段重写为量子扩展三件套（此前误把 L3 15 分内容标为 +8 Bonus） | docs/l3_riscv_encoding_spec.md + SOP.md + starter_kit/evidence/README.md
+
 <!-- 追加格式示例：
 - | 完成 EXP001 实验 | ARI=0.85 | public/docs/experiments/EXP001_xxx_20260818.md
 -->
